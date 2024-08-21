@@ -10,9 +10,4 @@
     <ProjectReference Include="..\CleanArch.Data\CleanArch.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="Dtos\" />
-  </ItemGroup>
-
 </Project>

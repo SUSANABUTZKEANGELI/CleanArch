@@ -16,8 +16,14 @@ namespace CleanArch.Data.Repository
             return _contexto.Matricula
                 .Include(x => x.Aluno)
                 .Include(x => x.Curso)
-             //   .ThenInclude(x => x.Professor)
                 .ToList();
         }
+
+        public Matricula SelecionarPorIdAlunoCurso(int idAluno, int idCurso)
+        {
+            return _contexto.Set<Matricula>()
+                .FirstOrDefault(x => x.IdAluno == idAluno && x.IdCurso == idCurso);
+        }
+
     }
 }

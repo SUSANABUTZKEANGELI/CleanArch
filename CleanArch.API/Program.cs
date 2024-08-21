@@ -1,6 +1,7 @@
-using CleanArch.Data;
 using CleanArch.Data.Repository;
+using CleanArch.Data.UseCases;
 using CleanArch.Domain.Repositories;
+using CleanArch.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 namespace CleanArch.API
@@ -10,6 +11,9 @@ namespace CleanArch.API
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddControllers();
+            builder.Services.AddScoped<MatriculaUseCase>();
 
             // Add services to the container.
             builder.Services.AddRazorPages();
