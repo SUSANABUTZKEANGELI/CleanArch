@@ -13,7 +13,13 @@ namespace CleanArch.API
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddControllers();
+
+            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
+
             builder.Services.AddScoped<MatriculaUseCase>();
+            builder.Services.AddScoped<IncluirAlunoUseCase>();
 
             // Add services to the container.
             builder.Services.AddRazorPages();
@@ -40,6 +46,12 @@ namespace CleanArch.API
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI();
+            }
 
             app.UseAuthorization();
 

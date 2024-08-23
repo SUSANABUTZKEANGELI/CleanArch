@@ -18,7 +18,7 @@ namespace CleanArch.Infrastructure
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
-        //    optionsBuilder.UseSqlServer("Server=SABRL6S7NS53; Database=AmbevConexao; Trusted_Connection=True; TrustServerCertificate=True"); 
+        //    optionsBuilder.UseSqlServer("Server=SABRL6S7NS53; Database=CleanArch; Trusted_Connection=True; TrustServerCertificate=True"); 
         //    base.OnConfiguring(optionsBuilder);
         //}
 
