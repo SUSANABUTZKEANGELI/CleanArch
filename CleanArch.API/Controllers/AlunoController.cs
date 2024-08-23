@@ -12,24 +12,42 @@ namespace CleanArch.API.Controllers
     {
         private readonly IAlunoRepository _repository;
         private readonly IncluirAlunoUseCase _incluirAlunoUseCase;
+        private readonly ListarTodosAlunosUseCase _listarTodosAlunosUseCase;
+        private readonly ListarUmAlunoUseCase _listarUmAlunoUseCase;
+        private readonly AlterarAlunoUseCase _alterarAlunoUseCase;
+        private readonly ExcluirAlunoUseCase _excluirAlunoUseCase;
 
-        public AlunoController(IAlunoRepository repository, IncluirAlunoUseCase incluirAlunoUseCase)
+        public AlunoController(IAlunoRepository repository, 
+            IncluirAlunoUseCase incluirAlunoUseCase,
+            ListarTodosAlunosUseCase listarTodosAlunosUseCase,
+            ListarUmAlunoUseCase listarUmAlunoUseCase,
+            AlterarAlunoUseCase alterarAlunoUseCase,
+            ExcluirAlunoUseCase excluirAlunoUseCase)
         {
             _repository = repository;
             _incluirAlunoUseCase = incluirAlunoUseCase;
+            _listarTodosAlunosUseCase = listarTodosAlunosUseCase;
+            _listarUmAlunoUseCase = listarUmAlunoUseCase;
+            _alterarAlunoUseCase = alterarAlunoUseCase;
+            _excluirAlunoUseCase = excluirAlunoUseCase;
         }
 
         [HttpGet]
         public ActionResult<IEnumerable<Aluno>> Get()
         {
-            var alunos = _repository.SelecionarTudo();
+            var alunos = _listarTodosAlunosUseCase.ListarAlunos();
             return alunos == null ? NotFound() : alunos;
         }
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var aluno = _repository.SelecionarPorId(id);
+            if (id == null)
+            {
+                return BadRequest("Dados inválidos.");
+            }
+
+            var aluno = _listarUmAlunoUseCase.ListarUmAluno(id);
             return aluno == null ? NotFound() : Ok(aluno); 
         }
 
@@ -51,25 +69,31 @@ namespace CleanArch.API.Controllers
             {
                 return BadRequest("Falha na inclusão do aluno");
             }
-            //return CreatedAtAction(nameof(Matricular), new { id = matricula.Id} , matricula);
         }
 
         [HttpPut("{id}")]
-        public Aluno Put(int id, [FromBody] AlunoDto alunoDto)
+        public IActionResult AlterarAluno(int id, [FromBody] AlunoAltDto alunoAltDto)
         {
-            var alunoEntidade = _repository.SelecionarPorId(id);
+            if (id == null || alunoAltDto == null)
+            {
+                return BadRequest("Dados inválidos.");
+            }
+            var aluno = _alterarAlunoUseCase.AlterarAluno(id, alunoAltDto.Nome, alunoAltDto.Endereco, alunoAltDto.Email, alunoAltDto.Ativo);
 
-            alunoEntidade.AlterarNome(alunoDto.Nome);
-
-            _repository.Alterar(alunoEntidade);
-
-            return alunoEntidade;
+            if (aluno != null)
+            {
+                return Ok(aluno);
+            }
+            else
+            {
+                return BadRequest("Falha na alteração do aluno");
+            }
         }
 
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            _repository.Excluir(id);
+            _excluirAlunoUseCase.ExcluirAluno(id);
 
         }
     }

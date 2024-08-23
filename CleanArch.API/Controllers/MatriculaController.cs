@@ -11,18 +11,25 @@ namespace CleanArch.API.Controllers
     public class MatriculaController : ControllerBase
     {
         private readonly IMatriculaRepository _repository;
-        private readonly MatriculaUseCase _matriculaUseCase;
+        private readonly IncluirMatriculaUseCase _incluirMatriculaUseCase;
+        private readonly ListarTodasMatriculasUseCase _listarTodasMatriculasUseCase;
+        private readonly AlterarMatriculaUseCase _alterarMatriculaUseCase;
 
-        public MatriculaController(IMatriculaRepository repository, MatriculaUseCase matriculaUseCase)
+        public MatriculaController(IMatriculaRepository repository, 
+            IncluirMatriculaUseCase incluirMatriculaUseCase,
+            ListarTodasMatriculasUseCase listarTodasMatriculasUseCase,
+            AlterarMatriculaUseCase alterarMatriculaUseCase)
         {
             _repository = repository;
-            _matriculaUseCase = matriculaUseCase;
+            _incluirMatriculaUseCase = incluirMatriculaUseCase;
+            _listarTodasMatriculasUseCase = listarTodasMatriculasUseCase;
+            _alterarMatriculaUseCase = alterarMatriculaUseCase;
         }
 
         [HttpGet]
         public ActionResult<IEnumerable<Matricula>> Get()
         {
-            var matriculas = _repository.SelecionarTudo();
+            var matriculas = _listarTodasMatriculasUseCase.ListarMatriculas();
             return matriculas == null ? NotFound() : matriculas;
         }
 
@@ -41,7 +48,7 @@ namespace CleanArch.API.Controllers
                 return BadRequest("Dados inválidos.");
             }
 
-            var matricula = _matriculaUseCase.Matricular(matriculaDto.IdCurso, matriculaDto.IdAluno);
+            var matricula = _incluirMatriculaUseCase.Matricular(matriculaDto.IdCurso, matriculaDto.IdAluno);
 
             if (matricula != null)
             {
@@ -51,26 +58,25 @@ namespace CleanArch.API.Controllers
             {
                 return BadRequest("Falha na inclusão da matrícula");
             }
-            //return CreatedAtAction(nameof(Matricular), new { id = matricula.Id} , matricula);
         }
 
         [HttpPut("{id}")]
-        public Matricula Put(int id, [FromBody] MatriculaDto matriculaDto)
+        public IActionResult Put(int id, [FromBody] MatriculaAltDto matriculaAltDto)
         {
-            var matriculaEntidade = _repository.SelecionarPorId(id);
+            if (id == null)
+            {
+                return BadRequest("Dados inválidos.");
+            }
+            var matricula = _alterarMatriculaUseCase.AlterarMatricula(id, matriculaAltDto.StatusMatricula);
 
-            matriculaEntidade.AlterarStatusMatricula(matriculaDto.StatusMatricula);
-
-            _repository.Alterar(matriculaEntidade);
-
-            return matriculaEntidade;
-        }
-
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-            _repository.Excluir(id);
-
+            if (matricula != null)
+            {
+                return Ok(matricula);
+            }
+            else
+            {
+                return BadRequest("Falha na alteração da matricula");
+            }
         }
     }
 }

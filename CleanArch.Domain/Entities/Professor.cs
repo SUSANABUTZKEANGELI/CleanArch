@@ -4,8 +4,8 @@ namespace CleanArch.Domain.Entities
     public class Professor : IEntity
     {
         public int Id { get; set; }
-        public string Nome { get; private set; }
-        public string Email { get; private set; }
+        public string Nome { get; set; }
+        public string Email { get; set; }
         public List<Curso> Cursos { get; set; }
 
         public static Professor NovoProfessor(string nome, string email)

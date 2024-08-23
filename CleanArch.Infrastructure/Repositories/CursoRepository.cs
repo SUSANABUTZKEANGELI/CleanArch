@@ -11,5 +11,11 @@ namespace CleanArch.Data.Repository
         {
         }
 
+        public Task<Curso> SelecionarComMatriculas(int id)
+        {
+            return _contexto.Set<Curso>()
+                .Include(c => c.Matriculas) // Carrega as matrículas associadas               .FirstOrDefaultAsync(c => c.Id == id);
+                .FirstOrDefaultAsync(c => c.Id == id);
+        }
     }
 }

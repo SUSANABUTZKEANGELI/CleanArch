@@ -18,11 +18,28 @@ namespace CleanArch.API
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.AddScoped<MatriculaUseCase>();
             builder.Services.AddScoped<IncluirAlunoUseCase>();
+            builder.Services.AddScoped<ListarTodosAlunosUseCase>();
+            builder.Services.AddScoped<ListarUmAlunoUseCase>();
+            builder.Services.AddScoped<AlterarAlunoUseCase>();
+            builder.Services.AddScoped<ExcluirAlunoUseCase>();
+            
+            builder.Services.AddScoped<IncluirProfessorUseCase>();
+            builder.Services.AddScoped<ListarTodosProfessoresUseCase>();
+            builder.Services.AddScoped<ListarUmProfessorUseCase>();
+            builder.Services.AddScoped<AlterarProfessorUseCase>();
+            builder.Services.AddScoped<ExcluirProfessorUseCase>();
 
-            // Add services to the container.
-            builder.Services.AddRazorPages();
+            builder.Services.AddScoped<IncluirCursoUseCase>();
+            builder.Services.AddScoped<ListarTodosCursosUseCase>();
+            builder.Services.AddScoped<ListarUmCursoUseCase>();
+            builder.Services.AddScoped<AlterarCursoUseCase>();
+            builder.Services.AddScoped<ExcluirCursoUseCase>();
+
+            builder.Services.AddScoped<IncluirMatriculaUseCase>();
+            builder.Services.AddScoped<ListarTodasMatriculasUseCase>();
+            builder.Services.AddScoped<AlterarMatriculaUseCase>();
+
 
             builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             builder.Services.AddScoped<IAlunoRepository, AlunoRepository>();
@@ -34,28 +51,17 @@ namespace CleanArch.API
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment())
-            {
-                app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
-
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
-
-            app.UseRouting();
-
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
 
+            app.UseHttpsRedirection();
+
             app.UseAuthorization();
 
-            app.MapRazorPages();
+            app.MapControllers();
 
             app.Run();
         }
