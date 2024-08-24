@@ -1,5 +1,6 @@
 ﻿using CleanArch.Domain.Entities;
 using CleanArch.Domain.Repositories;
+using FluentValidation;
 
 namespace CleanArch.Application.UseCases
 {
@@ -7,11 +8,13 @@ namespace CleanArch.Application.UseCases
     {
         private readonly ICursoRepository _cursoRepository;
         private readonly IProfessorRepository _professorRepository;
+        private readonly IValidator<Curso> _validator;
 
-        public IncluirCursoUseCase(ICursoRepository cursoRepository, IProfessorRepository professorRepository)
+        public IncluirCursoUseCase(ICursoRepository cursoRepository, IProfessorRepository professorRepository, IValidator<Curso> validator)
         {
             _cursoRepository = cursoRepository;
             _professorRepository = professorRepository; 
+            _validator = validator;
         }
 
         public Curso IncluirCurso(string nome, string descricao, DateTime dataInicio, int idProfessor) 
@@ -19,8 +22,7 @@ namespace CleanArch.Application.UseCases
             var professor = _professorRepository.SelecionarPorId(idProfessor);
             if (professor == null)
             {
-                return null;
-                // professor não cadastrado
+                throw new ValidationException("Professor Inexistente");
             }
 
             var curso = new Curso()
@@ -31,6 +33,12 @@ namespace CleanArch.Application.UseCases
                 Ativo = true,
                 IdProfessor = idProfessor
             };
+
+            var result = _validator.Validate(curso);
+            if (!result.IsValid)
+            {
+                throw new ValidationException(result.Errors);
+            }
 
             _cursoRepository.Incluir(curso);
 

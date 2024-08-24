@@ -2,6 +2,7 @@
 using CleanArch.Application.UseCases;
 using CleanArch.Domain.Entities;
 using CleanArch.Domain.Repositories;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CleanArch.API.Controllers
@@ -53,41 +54,41 @@ namespace CleanArch.API.Controllers
 
         [HttpPost]
         public IActionResult IncluirAluno([FromBody] AlunoDto alunoDto)
-        {
-            if (alunoDto == null)
+        {            
+            try
             {
-                return BadRequest("Dados inválidos.");
+                _incluirAlunoUseCase.IncluirAluno(alunoDto.Nome, alunoDto.Endereco, alunoDto.Email);
+                return Ok(alunoDto); 
+            }
+            catch (ValidationException ex)
+            {
+                // Cria uma resposta com os erros de validação
+                var errors = ex.Errors.Select(e => new { e.ErrorMessage });
+                return BadRequest(new { Errors = errors });
             }
 
-            var aluno = _incluirAlunoUseCase.IncluirAluno(alunoDto.Nome, alunoDto.Endereco, alunoDto.Email);
-
-            if (aluno != null)
-            {
-                return Ok(aluno);
-            }
-            else
-            {
-                return BadRequest("Falha na inclusão do aluno");
-            }
         }
 
         [HttpPut("{id}")]
         public IActionResult AlterarAluno(int id, [FromBody] AlunoAltDto alunoAltDto)
-        {
-            if (id == null || alunoAltDto == null)
+        {            
+            try
             {
-                return BadRequest("Dados inválidos.");
+                _alterarAlunoUseCase.AlterarAluno(id, alunoAltDto.Nome, alunoAltDto.Endereco, alunoAltDto.Email, alunoAltDto.Ativo);
+                return Ok(alunoAltDto); 
             }
-            var aluno = _alterarAlunoUseCase.AlterarAluno(id, alunoAltDto.Nome, alunoAltDto.Endereco, alunoAltDto.Email, alunoAltDto.Ativo);
+            catch (ValidationException ex)
+            {
+                if (ex.Message == "Aluno Inexistente")
+                {
+                    return NotFound(new { Message = ex.Message }); 
+                }
 
-            if (aluno != null)
-            {
-                return Ok(aluno);
+                // Cria uma resposta com os erros de validação
+                var errors = ex.Errors.Select(e => new { e.ErrorMessage });
+                return BadRequest(new { Errors = errors });
             }
-            else
-            {
-                return BadRequest("Falha na alteração do aluno");
-            }
+
         }
 
         [HttpDelete("{id}")]

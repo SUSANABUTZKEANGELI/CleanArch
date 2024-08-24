@@ -2,6 +2,7 @@
 using CleanArch.Application.UseCases;
 using CleanArch.Domain.Entities;
 using CleanArch.Domain.Repositories;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CleanArch.API.Controllers
@@ -53,40 +54,48 @@ namespace CleanArch.API.Controllers
 
         [HttpPost]
         public IActionResult IncluirCurso([FromBody] CursoDto cursoDto)
-        {
-            if (cursoDto == null)
+        {            
+            try
             {
-                return BadRequest("Dados inválidos.");
+                _incluirCursoUseCase.IncluirCurso(cursoDto.Nome, cursoDto.Descricao, cursoDto.DataInicio, cursoDto.IdProfessor);
+                return Ok(cursoDto);
+            }
+            catch (ValidationException ex)
+            {
+                if (ex.Message == "Professor Inexistente")
+                {
+                    return NotFound(new { Message = ex.Message });
+                }
+
+                // Cria uma resposta com os erros de validação
+                var errors = ex.Errors.Select(e => new { e.ErrorMessage });
+                return BadRequest(new { Errors = errors });
             }
 
-            var curso = _incluirCursoUseCase.IncluirCurso(cursoDto.Nome, cursoDto.Descricao, cursoDto.DataInicio, cursoDto.IdProfessor);
-
-            if (curso != null)
-            {
-                return Ok(curso);
-            }
-            else
-            {
-                return BadRequest("Falha na inclusão do Curso");
-            }
         }
 
         [HttpPut("{id}")]
         public IActionResult AlterarCurso(int id, [FromBody] CursoAltDto cursoAltDto)
-        {
-            if (id == null || cursoAltDto == null)
+        {            
+            try
             {
-                return BadRequest("Dados inválidos.");
+                _alterarCursoUseCase.AlterarCurso(id, cursoAltDto.Nome, cursoAltDto.Descricao, cursoAltDto.DataInicio, cursoAltDto.Ativo, cursoAltDto.IdProfessor);
+                return Ok(cursoAltDto);
             }
-            var curso = _alterarCursoUseCase.AlterarCurso(id, cursoAltDto.Nome, cursoAltDto.Descricao, cursoAltDto.DataInicio, cursoAltDto.Ativo, cursoAltDto.IdProfessor);
+            catch (ValidationException ex)
+            {
+                if (ex.Message == "Curso Inexistente")
+                {
+                    return NotFound(new { Message = ex.Message });
+                }
+                if (ex.Message == "Professor Inexistente")
+                {
+                    return NotFound(new { Message = ex.Message });
+                }
 
-            if (curso != null)
-            {
-                return Ok(curso);
-            }
-            else
-            {
-                return BadRequest("Falha na alteração do Curso");
+                // Cria uma resposta com os erros de validação
+                var errors = ex.Errors.Select(e => new { e.ErrorMessage });
+                return BadRequest(new { Errors = errors });
             }
         }
 

@@ -3,9 +3,9 @@ using FluentValidation;
 
 namespace CleanArch.Application.Validators
 {
-    public class IncluirAlunoUseCaseValidator : AbstractValidator<Aluno>
+    public class AlunoUseCaseValidator : AbstractValidator<Aluno>
     {
-        public IncluirAlunoUseCaseValidator()
+        public AlunoUseCaseValidator()
         {
             RuleFor(a => a.Name)
                 .NotEmpty()
@@ -31,7 +31,7 @@ namespace CleanArch.Application.Validators
 
             RuleFor(a => a.Email)
                 .EmailAddress()
-                .WithMessage("E-mail não válido");
+                .WithMessage("E-mail inválido");
 
         }
     }

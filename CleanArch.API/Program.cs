@@ -46,7 +46,9 @@ namespace CleanArch.API
             builder.Services.AddScoped<AlterarMatriculaUseCase>();
 
             // Registrar validadores do FluentValidation
-            builder.Services.AddValidatorsFromAssemblyContaining<IncluirAlunoUseCaseValidator>();
+            builder.Services.AddValidatorsFromAssemblyContaining<AlunoUseCaseValidator>();
+            builder.Services.AddValidatorsFromAssemblyContaining<ProfessorUseCaseValidator>();
+            builder.Services.AddValidatorsFromAssemblyContaining<CursoUseCaseValidator>();
 
 
             builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));

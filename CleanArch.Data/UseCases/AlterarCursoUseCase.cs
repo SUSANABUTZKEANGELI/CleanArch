@@ -1,6 +1,7 @@
 ﻿using CleanArch.Application.Repository;
 using CleanArch.Domain.Entities;
 using CleanArch.Domain.Repositories;
+using FluentValidation;
 
 namespace CleanArch.Application.UseCases
 {
@@ -8,12 +9,14 @@ namespace CleanArch.Application.UseCases
     {
         private readonly ICursoRepository _cursoRepository;
         private readonly IProfessorRepository _professorRepository;
+        private readonly IValidator<Curso> _validator;
 
 
-        public AlterarCursoUseCase(ICursoRepository cursoRepository, IProfessorRepository professorRepository)
+        public AlterarCursoUseCase(ICursoRepository cursoRepository, IProfessorRepository professorRepository, IValidator<Curso> validator)
         {
             _cursoRepository = cursoRepository;
             _professorRepository = professorRepository;
+            _validator = validator;
         }
 
         public Curso AlterarCurso(int id, string nome, string descricao, DateTime dataInicio, bool ativo, int idProfessor) 
@@ -21,15 +24,13 @@ namespace CleanArch.Application.UseCases
             var curso = _cursoRepository.SelecionarPorId(id);
             if (curso == null)
             {
-                return null;
-                // curso não existente
+                throw new ValidationException("Curso Inexistente");
             }
 
             var professor = _professorRepository.SelecionarPorId(idProfessor);
             if (professor == null)
             {
-                return null;
-                // professor não cadastrado
+                throw new ValidationException("Professor Inexistente");
             }
 
             curso.Nome = nome;
@@ -37,6 +38,12 @@ namespace CleanArch.Application.UseCases
             curso.DataInicio = dataInicio;
             curso.Ativo = ativo;
             curso.IdProfessor = idProfessor;
+
+            var result = _validator.Validate(curso);
+            if (!result.IsValid)
+            {
+                throw new ValidationException(result.Errors);
+            }
 
             _cursoRepository.Alterar(curso);
 
