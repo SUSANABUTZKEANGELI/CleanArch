@@ -16,7 +16,7 @@ namespace CleanArch.Application.UseCases
             _professorRepository = professorRepository;
         }
 
-        public Curso AlterarCurso(int id, string nome, string descricao, DateTime ApplicationInicio, bool ativo, int idProfessor) 
+        public Curso AlterarCurso(int id, string nome, string descricao, DateTime dataInicio, bool ativo, int idProfessor) 
         {
             var curso = _cursoRepository.SelecionarPorId(id);
             if (curso == null)
@@ -34,7 +34,7 @@ namespace CleanArch.Application.UseCases
 
             curso.Nome = nome;
             curso.Descricao = descricao;
-            curso.ApplicationInicio = ApplicationInicio;
+            curso.DataInicio = dataInicio;
             curso.Ativo = ativo;
             curso.IdProfessor = idProfessor;
 

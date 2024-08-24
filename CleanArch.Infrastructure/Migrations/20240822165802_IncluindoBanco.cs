@@ -50,7 +50,7 @@ namespace CleanArch.Infrastructure.Migrations
                     Nome = table.Column<string>(type: "varchar(100)", nullable: false),
                     Descricao = table.Column<string>(type: "varchar(500)", nullable: false),
                     IdProfessor = table.Column<int>(type: "int", nullable: false),
-                    ApplicationInicio = table.Column<DateTime>(type: "datetime", nullable: false),
+                    DataInicio = table.Column<DateTime>(type: "datetime", nullable: false),
                     Ativo = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>

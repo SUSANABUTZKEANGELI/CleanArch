@@ -20,7 +20,7 @@ namespace CleanArch.Infrastructure.Maps
                 .HasColumnType("varchar(500)")
                 .IsRequired();
 
-            builder.Property(x => x.ApplicationInicio)
+            builder.Property(x => x.DataInicio)
                 .HasColumnType("datetime")
                 .IsRequired();
 

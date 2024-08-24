@@ -14,7 +14,7 @@ namespace CleanArch.Application.UseCases
             _professorRepository = professorRepository; 
         }
 
-        public Curso IncluirCurso(string nome, string descricao, DateTime ApplicationInicio, int idProfessor) 
+        public Curso IncluirCurso(string nome, string descricao, DateTime dataInicio, int idProfessor) 
         {
             var professor = _professorRepository.SelecionarPorId(idProfessor);
             if (professor == null)
@@ -27,7 +27,7 @@ namespace CleanArch.Application.UseCases
             {
                 Nome = nome,
                 Descricao = descricao,
-                ApplicationInicio = ApplicationInicio,
+                DataInicio = dataInicio,
                 Ativo = true,
                 IdProfessor = idProfessor
             };

@@ -1,7 +1,10 @@
 using CleanArch.Application.Repository;
 using CleanArch.Application.UseCases;
+using CleanArch.Application.Validators;
 using CleanArch.Domain.Repositories;
 using CleanArch.Infrastructure;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CleanArch.API
@@ -14,6 +17,8 @@ namespace CleanArch.API
 
             builder.Services.AddControllers();
 
+            builder.Services.AddFluentValidationAutoValidation();
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -23,7 +28,7 @@ namespace CleanArch.API
             builder.Services.AddScoped<ListarUmAlunoUseCase>();
             builder.Services.AddScoped<AlterarAlunoUseCase>();
             builder.Services.AddScoped<ExcluirAlunoUseCase>();
-            
+
             builder.Services.AddScoped<IncluirProfessorUseCase>();
             builder.Services.AddScoped<ListarTodosProfessoresUseCase>();
             builder.Services.AddScoped<ListarUmProfessorUseCase>();
@@ -39,6 +44,9 @@ namespace CleanArch.API
             builder.Services.AddScoped<IncluirMatriculaUseCase>();
             builder.Services.AddScoped<ListarTodasMatriculasUseCase>();
             builder.Services.AddScoped<AlterarMatriculaUseCase>();
+
+            // Registrar validadores do FluentValidation
+            builder.Services.AddValidatorsFromAssemblyContaining<IncluirAlunoUseCaseValidator>();
 
 
             builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));

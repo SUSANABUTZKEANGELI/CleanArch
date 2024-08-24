@@ -36,7 +36,7 @@ namespace CleanArch.Application.UseCases
             }
 
             if (!curso.Result.Ativo ||
-                curso.Result.ApplicationInicio <= DateTime.UtcNow)
+                curso.Result.DataInicio <= DateTime.UtcNow)
             {
                 return null;
                 // curso inativo ou 

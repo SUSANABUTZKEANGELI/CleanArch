@@ -8,17 +8,17 @@ namespace CleanArch.Domain.Entities
         public string Descricao { get; set;}
         public int IdProfessor { get; set; }
         public Professor Professor { get; set; }
-        public DateTime ApplicationInicio { get; set; }
+        public DateTime DataInicio { get; set; }
         public bool Ativo { get; set; }
         public List<Matricula> Matriculas { get; set; }
 
-        public static Curso NovoCurso(string nome, string descricao, int idProfessor, DateTime ApplicationInicio)
+        public static Curso NovoCurso(string nome, string descricao, int idProfessor, DateTime dataInicio)
         {
             var curso = new Curso();
             curso.Nome = nome;
             curso.Descricao = descricao;
             curso.IdProfessor = idProfessor;
-            curso.ApplicationInicio = ApplicationInicio;
+            curso.DataInicio = dataInicio;
             curso.Professor = new Professor();
             curso.Matriculas = new List<Matricula>();
 
