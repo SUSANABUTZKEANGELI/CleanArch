@@ -550,7 +550,7 @@ var i,
 	matches,
 	contains,
 
-	// Instance-specific data
+	// Instance-specific Application
 	expando = "sizzle" + 1 * new Date(),
 	preferredDoc = window.document,
 	dirruns = 0,
@@ -666,7 +666,7 @@ var i,
 	rsibling = /[+~]/,
 
 	// CSS escapes
-	// http://www.w3.org/TR/CSS21/syndata.html#escaped-characters
+	// http://www.w3.org/TR/CSS21/synApplication.html#escaped-characters
 	runescape = new RegExp( "\\\\[\\da-fA-F]{1,6}" + whitespace + "?|\\\\([^\\r\\n\\f])", "g" ),
 	funescape = function( escape, nonHex ) {
 		var high = "0x" + escape.slice( 1 ) - 0x10000;
@@ -896,7 +896,7 @@ function Sizzle( selector, context, results, seed ) {
 
 /**
  * Create key-value caches of limited size
- * @returns {function(string, object)} Returns the Object data after storing it on itself with
+ * @returns {function(string, object)} Returns the Object Application after storing it on itself with
  *	property name the (space-suffixed) string and (if the cache is larger than Expr.cacheLength)
  *	deleting the oldest entry
  */
@@ -1952,7 +1952,7 @@ Expr = Sizzle.selectors = {
 
 						start = [ forward ? parent.firstChild : parent.lastChild ];
 
-						// non-xml :nth-child(...) stores cache data on `parent`
+						// non-xml :nth-child(...) stores cache Application on `parent`
 						if ( forward && useCache ) {
 
 							// Seek `elem` from a previously-cached index
@@ -2204,7 +2204,7 @@ Expr = Sizzle.selectors = {
 		"empty": function( elem ) {
 
 			// http://www.w3.org/TR/selectors/#empty-pseudo
-			// :empty is negated by element (1) or content nodes (text: 3; cdata: 4; entity ref: 5),
+			// :empty is negated by element (1) or content nodes (text: 3; cApplication: 4; entity ref: 5),
 			//   but not by others (comment: 8; processing instruction: 7; etc.)
 			// nodeType < 6 works because attributes (2) do not appear as children
 			for ( elem = elem.firstChild; elem; elem = elem.nextSibling ) {
@@ -2414,7 +2414,7 @@ function addCombinator( matcher, combinator, base ) {
 			var oldCache, uniqueCache, outerCache,
 				newCache = [ dirruns, doneName ];
 
-			// We can't set arbitrary data on XML nodes, so they don't benefit from combinator caching
+			// We can't set arbitrary Application on XML nodes, so they don't benefit from combinator caching
 			if ( xml ) {
 				while ( ( elem = elem[ dir ] ) ) {
 					if ( elem.nodeType === 1 || checkNonElements ) {
@@ -3371,7 +3371,7 @@ jQuery.each( {
 		if ( elem.contentDocument != null &&
 
 			// Support: IE 11+
-			// <object> elements with no `data` attribute has an object
+			// <object> elements with no `Application` attribute has an object
 			// `contentDocument` with a `null` prototype.
 			getProto( elem.contentDocument ) ) {
 
@@ -3473,7 +3473,7 @@ jQuery.Callbacks = function( options ) {
 		// Actual callback list
 		list = [],
 
-		// Queue of execution data for repeatable lists
+		// Queue of execution Application for repeatable lists
 		queue = [],
 
 		// Index of currently firing callback (modified by add/remove as needed)
@@ -3496,14 +3496,14 @@ jQuery.Callbacks = function( options ) {
 					if ( list[ firingIndex ].apply( memory[ 0 ], memory[ 1 ] ) === false &&
 						options.stopOnFalse ) {
 
-						// Jump to end and forget the data so .add doesn't re-fire
+						// Jump to end and forget the Application so .add doesn't re-fire
 						firingIndex = list.length;
 						memory = false;
 					}
 				}
 			}
 
-			// Forget the data if we're done with it
+			// Forget the Application if we're done with it
 			if ( !options.memory ) {
 				memory = false;
 			}
@@ -3513,7 +3513,7 @@ jQuery.Callbacks = function( options ) {
 			// Clean up if we're done firing for good
 			if ( locked ) {
 
-				// Keep an empty list if we have data for future add calls
+				// Keep an empty list if we have Application for future add calls
 				if ( memory ) {
 					list = [];
 
@@ -3993,7 +3993,7 @@ jQuery.extend( {
 			// count of unprocessed arguments
 			i = remaining,
 
-			// subordinate fulfillment data
+			// subordinate fulfillment Application
 			resolveContexts = Array( i ),
 			resolveValues = slice.call( arguments ),
 
@@ -4209,13 +4209,13 @@ function fcamelCase( _all, letter ) {
 	return letter.toUpperCase();
 }
 
-// Convert dashed to camelCase; used by the css and data modules
+// Convert dashed to camelCase; used by the css and Application modules
 // Support: IE <=9 - 11, Edge 12 - 15
 // Microsoft forgot to hump their vendor prefix (#9572)
 function camelCase( string ) {
 	return string.replace( rmsPrefix, "ms-" ).replace( rdashAlpha, fcamelCase );
 }
-var acceptData = function( owner ) {
+var acceptApplication = function( owner ) {
 
 	// Accepts only:
 	//  - Node
@@ -4229,13 +4229,13 @@ var acceptData = function( owner ) {
 
 
 
-function Data() {
-	this.expando = jQuery.expando + Data.uid++;
+function Application() {
+	this.expando = jQuery.expando + Application.uid++;
 }
 
-Data.uid = 1;
+Application.uid = 1;
 
-Data.prototype = {
+Application.prototype = {
 
 	cache: function( owner ) {
 
@@ -4246,10 +4246,10 @@ Data.prototype = {
 		if ( !value ) {
 			value = {};
 
-			// We can accept data for non-element nodes in modern browsers,
+			// We can accept Application for non-element nodes in modern browsers,
 			// but we should not, see #8335.
 			// Always return an empty object.
-			if ( acceptData( owner ) ) {
+			if ( acceptApplication( owner ) ) {
 
 				// If it is a node unlikely to be stringify-ed or looped over
 				// use plain assignment
@@ -4258,7 +4258,7 @@ Data.prototype = {
 
 				// Otherwise secure it in a non-enumerable property
 				// configurable must be true to allow the property to be
-				// deleted when data is removed
+				// deleted when Application is removed
 				} else {
 					Object.defineProperty( owner, this.expando, {
 						value: value,
@@ -4270,21 +4270,21 @@ Data.prototype = {
 
 		return value;
 	},
-	set: function( owner, data, value ) {
+	set: function( owner, Application, value ) {
 		var prop,
 			cache = this.cache( owner );
 
 		// Handle: [ owner, key, value ] args
 		// Always use camelCase key (gh-2257)
-		if ( typeof data === "string" ) {
-			cache[ camelCase( data ) ] = value;
+		if ( typeof Application === "string" ) {
+			cache[ camelCase( Application ) ] = value;
 
 		// Handle: [ owner, { properties } ] args
 		} else {
 
 			// Copy the properties one-by-one to the cache object
-			for ( prop in data ) {
-				cache[ camelCase( prop ) ] = data[ prop ];
+			for ( prop in Application ) {
+				cache[ camelCase( prop ) ] = Application[ prop ];
 			}
 		}
 		return cache;
@@ -4307,7 +4307,7 @@ Data.prototype = {
 		// which value to return, respectively either:
 		//
 		//   1. The entire cache object
-		//   2. The data stored at the key
+		//   2. The Application stored at the key
 		//
 		if ( key === undefined ||
 				( ( key && typeof key === "string" ) && value === undefined ) ) {
@@ -4324,7 +4324,7 @@ Data.prototype = {
 		this.set( owner, key, value );
 
 		// Since the "set" path can have two possible entry points
-		// return the expected data based on which path was taken[*]
+		// return the expected Application based on which path was taken[*]
 		return value !== undefined ? value : key;
 	},
 	remove: function( owner, key ) {
@@ -4360,7 +4360,7 @@ Data.prototype = {
 			}
 		}
 
-		// Remove the expando if there's no more data
+		// Remove the expando if there's no more Application
 		if ( key === undefined || jQuery.isEmptyObject( cache ) ) {
 
 			// Support: Chrome <=35 - 45
@@ -4374,14 +4374,14 @@ Data.prototype = {
 			}
 		}
 	},
-	hasData: function( owner ) {
+	hasApplication: function( owner ) {
 		var cache = owner[ this.expando ];
 		return cache !== undefined && !jQuery.isEmptyObject( cache );
 	}
 };
-var dataPriv = new Data();
+var ApplicationPriv = new Application();
 
-var dataUser = new Data();
+var ApplicationUser = new Application();
 
 
 
@@ -4390,98 +4390,98 @@ var dataUser = new Data();
 //	1. Enforce API surface and semantic compatibility with 1.9.x branch
 //	2. Improve the module's maintainability by reducing the storage
 //		paths to a single mechanism.
-//	3. Use the same single mechanism to support "private" and "user" data.
-//	4. _Never_ expose "private" data to user code (TODO: Drop _data, _removeData)
+//	3. Use the same single mechanism to support "private" and "user" Application.
+//	4. _Never_ expose "private" Application to user code (TODO: Drop _Application, _removeApplication)
 //	5. Avoid exposing implementation details on user objects (eg. expando properties)
 //	6. Provide a clear path for implementation upgrade to WeakMap in 2014
 
 var rbrace = /^(?:\{[\w\W]*\}|\[[\w\W]*\])$/,
 	rmultiDash = /[A-Z]/g;
 
-function getData( data ) {
-	if ( data === "true" ) {
+function getApplication( Application ) {
+	if ( Application === "true" ) {
 		return true;
 	}
 
-	if ( data === "false" ) {
+	if ( Application === "false" ) {
 		return false;
 	}
 
-	if ( data === "null" ) {
+	if ( Application === "null" ) {
 		return null;
 	}
 
 	// Only convert to a number if it doesn't change the string
-	if ( data === +data + "" ) {
-		return +data;
+	if ( Application === +Application + "" ) {
+		return +Application;
 	}
 
-	if ( rbrace.test( data ) ) {
-		return JSON.parse( data );
+	if ( rbrace.test( Application ) ) {
+		return JSON.parse( Application );
 	}
 
-	return data;
+	return Application;
 }
 
-function dataAttr( elem, key, data ) {
+function ApplicationAttr( elem, key, Application ) {
 	var name;
 
 	// If nothing was found internally, try to fetch any
-	// data from the HTML5 data-* attribute
-	if ( data === undefined && elem.nodeType === 1 ) {
-		name = "data-" + key.replace( rmultiDash, "-$&" ).toLowerCase();
-		data = elem.getAttribute( name );
+	// Application from the HTML5 Application-* attribute
+	if ( Application === undefined && elem.nodeType === 1 ) {
+		name = "Application-" + key.replace( rmultiDash, "-$&" ).toLowerCase();
+		Application = elem.getAttribute( name );
 
-		if ( typeof data === "string" ) {
+		if ( typeof Application === "string" ) {
 			try {
-				data = getData( data );
+				Application = getApplication( Application );
 			} catch ( e ) {}
 
-			// Make sure we set the data so it isn't changed later
-			dataUser.set( elem, key, data );
+			// Make sure we set the Application so it isn't changed later
+			ApplicationUser.set( elem, key, Application );
 		} else {
-			data = undefined;
+			Application = undefined;
 		}
 	}
-	return data;
+	return Application;
 }
 
 jQuery.extend( {
-	hasData: function( elem ) {
-		return dataUser.hasData( elem ) || dataPriv.hasData( elem );
+	hasApplication: function( elem ) {
+		return ApplicationUser.hasApplication( elem ) || ApplicationPriv.hasApplication( elem );
 	},
 
-	data: function( elem, name, data ) {
-		return dataUser.access( elem, name, data );
+	Application: function( elem, name, Application ) {
+		return ApplicationUser.access( elem, name, Application );
 	},
 
-	removeData: function( elem, name ) {
-		dataUser.remove( elem, name );
+	removeApplication: function( elem, name ) {
+		ApplicationUser.remove( elem, name );
 	},
 
-	// TODO: Now that all calls to _data and _removeData have been replaced
-	// with direct calls to dataPriv methods, these can be deprecated.
-	_data: function( elem, name, data ) {
-		return dataPriv.access( elem, name, data );
+	// TODO: Now that all calls to _Application and _removeApplication have been replaced
+	// with direct calls to ApplicationPriv methods, these can be deprecated.
+	_Application: function( elem, name, Application ) {
+		return ApplicationPriv.access( elem, name, Application );
 	},
 
-	_removeData: function( elem, name ) {
-		dataPriv.remove( elem, name );
+	_removeApplication: function( elem, name ) {
+		ApplicationPriv.remove( elem, name );
 	}
 } );
 
 jQuery.fn.extend( {
-	data: function( key, value ) {
-		var i, name, data,
+	Application: function( key, value ) {
+		var i, name, Application,
 			elem = this[ 0 ],
 			attrs = elem && elem.attributes;
 
 		// Gets all values
 		if ( key === undefined ) {
 			if ( this.length ) {
-				data = dataUser.get( elem );
+				Application = ApplicationUser.get( elem );
 
-				if ( elem.nodeType === 1 && !dataPriv.get( elem, "hasDataAttrs" ) ) {
+				if ( elem.nodeType === 1 && !ApplicationPriv.get( elem, "hasApplicationAttrs" ) ) {
 					i = attrs.length;
 					while ( i-- ) {
 
@@ -4489,85 +4489,85 @@ jQuery.fn.extend( {
 						// The attrs elements can be null (#14894)
 						if ( attrs[ i ] ) {
 							name = attrs[ i ].name;
-							if ( name.indexOf( "data-" ) === 0 ) {
+							if ( name.indexOf( "Application-" ) === 0 ) {
 								name = camelCase( name.slice( 5 ) );
-								dataAttr( elem, name, data[ name ] );
+								ApplicationAttr( elem, name, Application[ name ] );
 							}
 						}
 					}
-					dataPriv.set( elem, "hasDataAttrs", true );
+					ApplicationPriv.set( elem, "hasApplicationAttrs", true );
 				}
 			}
 
-			return data;
+			return Application;
 		}
 
 		// Sets multiple values
 		if ( typeof key === "object" ) {
 			return this.each( function() {
-				dataUser.set( this, key );
+				ApplicationUser.set( this, key );
 			} );
 		}
 
 		return access( this, function( value ) {
-			var data;
+			var Application;
 
 			// The calling jQuery object (element matches) is not empty
 			// (and therefore has an element appears at this[ 0 ]) and the
 			// `value` parameter was not undefined. An empty jQuery object
 			// will result in `undefined` for elem = this[ 0 ] which will
-			// throw an exception if an attempt to read a data cache is made.
+			// throw an exception if an attempt to read a Application cache is made.
 			if ( elem && value === undefined ) {
 
-				// Attempt to get data from the cache
-				// The key will always be camelCased in Data
-				data = dataUser.get( elem, key );
-				if ( data !== undefined ) {
-					return data;
+				// Attempt to get Application from the cache
+				// The key will always be camelCased in Application
+				Application = ApplicationUser.get( elem, key );
+				if ( Application !== undefined ) {
+					return Application;
 				}
 
-				// Attempt to "discover" the data in
-				// HTML5 custom data-* attrs
-				data = dataAttr( elem, key );
-				if ( data !== undefined ) {
-					return data;
+				// Attempt to "discover" the Application in
+				// HTML5 custom Application-* attrs
+				Application = ApplicationAttr( elem, key );
+				if ( Application !== undefined ) {
+					return Application;
 				}
 
-				// We tried really hard, but the data doesn't exist.
+				// We tried really hard, but the Application doesn't exist.
 				return;
 			}
 
-			// Set the data...
+			// Set the Application...
 			this.each( function() {
 
 				// We always store the camelCased key
-				dataUser.set( this, key, value );
+				ApplicationUser.set( this, key, value );
 			} );
 		}, null, value, arguments.length > 1, null, true );
 	},
 
-	removeData: function( key ) {
+	removeApplication: function( key ) {
 		return this.each( function() {
-			dataUser.remove( this, key );
+			ApplicationUser.remove( this, key );
 		} );
 	}
 } );
 
 
 jQuery.extend( {
-	queue: function( elem, type, data ) {
+	queue: function( elem, type, Application ) {
 		var queue;
 
 		if ( elem ) {
 			type = ( type || "fx" ) + "queue";
-			queue = dataPriv.get( elem, type );
+			queue = ApplicationPriv.get( elem, type );
 
 			// Speed up dequeue by getting out quickly if this is just a lookup
-			if ( data ) {
-				if ( !queue || Array.isArray( data ) ) {
-					queue = dataPriv.access( elem, type, jQuery.makeArray( data ) );
+			if ( Application ) {
+				if ( !queue || Array.isArray( Application ) ) {
+					queue = ApplicationPriv.access( elem, type, jQuery.makeArray( Application ) );
 				} else {
-					queue.push( data );
+					queue.push( Application );
 				}
 			}
 			return queue || [];
@@ -4612,20 +4612,20 @@ jQuery.extend( {
 	// Not public - generate a queueHooks object, or return the current one
 	_queueHooks: function( elem, type ) {
 		var key = type + "queueHooks";
-		return dataPriv.get( elem, key ) || dataPriv.access( elem, key, {
+		return ApplicationPriv.get( elem, key ) || ApplicationPriv.access( elem, key, {
 			empty: jQuery.Callbacks( "once memory" ).add( function() {
-				dataPriv.remove( elem, [ type + "queue", key ] );
+				ApplicationPriv.remove( elem, [ type + "queue", key ] );
 			} )
 		} );
 	}
 } );
 
 jQuery.fn.extend( {
-	queue: function( type, data ) {
+	queue: function( type, Application ) {
 		var setter = 2;
 
 		if ( typeof type !== "string" ) {
-			data = type;
+			Application = type;
 			type = "fx";
 			setter--;
 		}
@@ -4634,10 +4634,10 @@ jQuery.fn.extend( {
 			return jQuery.queue( this[ 0 ], type );
 		}
 
-		return data === undefined ?
+		return Application === undefined ?
 			this :
 			this.each( function() {
-				var queue = jQuery.queue( this, type, data );
+				var queue = jQuery.queue( this, type, Application );
 
 				// Ensure a hooks for this queue
 				jQuery._queueHooks( this, type );
@@ -4677,7 +4677,7 @@ jQuery.fn.extend( {
 		type = type || "fx";
 
 		while ( i-- ) {
-			tmp = dataPriv.get( elements[ i ], type + "queueHooks" );
+			tmp = ApplicationPriv.get( elements[ i ], type + "queueHooks" );
 			if ( tmp && tmp.empty ) {
 				count++;
 				tmp.empty.add( resolve );
@@ -4846,7 +4846,7 @@ function showHide( elements, show ) {
 			// check is required in this first loop unless we have a nonempty display value (either
 			// inline or about-to-be-restored)
 			if ( display === "none" ) {
-				values[ index ] = dataPriv.get( elem, "display" ) || null;
+				values[ index ] = ApplicationPriv.get( elem, "display" ) || null;
 				if ( !values[ index ] ) {
 					elem.style.display = "";
 				}
@@ -4859,7 +4859,7 @@ function showHide( elements, show ) {
 				values[ index ] = "none";
 
 				// Remember what we're overwriting
-				dataPriv.set( elem, "display", display );
+				ApplicationPriv.set( elem, "display", display );
 			}
 		}
 	}
@@ -4988,10 +4988,10 @@ function setGlobalEval( elems, refElements ) {
 		l = elems.length;
 
 	for ( ; i < l; i++ ) {
-		dataPriv.set(
+		ApplicationPriv.set(
 			elems[ i ],
 			"globalEval",
-			!refElements || dataPriv.get( refElements[ i ], "globalEval" )
+			!refElements || ApplicationPriv.get( refElements[ i ], "globalEval" )
 		);
 	}
 }
@@ -5121,41 +5121,41 @@ function safeActiveElement() {
 	} catch ( err ) { }
 }
 
-function on( elem, types, selector, data, fn, one ) {
+function on( elem, types, selector, Application, fn, one ) {
 	var origFn, type;
 
 	// Types can be a map of types/handlers
 	if ( typeof types === "object" ) {
 
-		// ( types-Object, selector, data )
+		// ( types-Object, selector, Application )
 		if ( typeof selector !== "string" ) {
 
-			// ( types-Object, data )
-			data = data || selector;
+			// ( types-Object, Application )
+			Application = Application || selector;
 			selector = undefined;
 		}
 		for ( type in types ) {
-			on( elem, type, selector, data, types[ type ], one );
+			on( elem, type, selector, Application, types[ type ], one );
 		}
 		return elem;
 	}
 
-	if ( data == null && fn == null ) {
+	if ( Application == null && fn == null ) {
 
 		// ( types, fn )
 		fn = selector;
-		data = selector = undefined;
+		Application = selector = undefined;
 	} else if ( fn == null ) {
 		if ( typeof selector === "string" ) {
 
 			// ( types, selector, fn )
-			fn = data;
-			data = undefined;
+			fn = Application;
+			Application = undefined;
 		} else {
 
-			// ( types, data, fn )
-			fn = data;
-			data = selector;
+			// ( types, Application, fn )
+			fn = Application;
+			Application = selector;
 			selector = undefined;
 		}
 	}
@@ -5178,7 +5178,7 @@ function on( elem, types, selector, data, fn, one ) {
 		fn.guid = origFn.guid || ( origFn.guid = jQuery.guid++ );
 	}
 	return elem.each( function() {
-		jQuery.event.add( this, types, fn, data, selector );
+		jQuery.event.add( this, types, fn, Application, selector );
 	} );
 }
 
@@ -5190,19 +5190,19 @@ jQuery.event = {
 
 	global: {},
 
-	add: function( elem, types, handler, data, selector ) {
+	add: function( elem, types, handler, Application, selector ) {
 
 		var handleObjIn, eventHandle, tmp,
 			events, t, handleObj,
 			special, handlers, type, namespaces, origType,
-			elemData = dataPriv.get( elem );
+			elemApplication = ApplicationPriv.get( elem );
 
-		// Only attach events to objects that accept data
-		if ( !acceptData( elem ) ) {
+		// Only attach events to objects that accept Application
+		if ( !acceptApplication( elem ) ) {
 			return;
 		}
 
-		// Caller can pass in an object of custom data in lieu of the handler
+		// Caller can pass in an object of custom Application in lieu of the handler
 		if ( handler.handler ) {
 			handleObjIn = handler;
 			handler = handleObjIn.handler;
@@ -5221,11 +5221,11 @@ jQuery.event = {
 		}
 
 		// Init the element's event structure and main handler, if this is the first
-		if ( !( events = elemData.events ) ) {
-			events = elemData.events = Object.create( null );
+		if ( !( events = elemApplication.events ) ) {
+			events = elemApplication.events = Object.create( null );
 		}
-		if ( !( eventHandle = elemData.handle ) ) {
-			eventHandle = elemData.handle = function( e ) {
+		if ( !( eventHandle = elemApplication.handle ) ) {
+			eventHandle = elemApplication.handle = function( e ) {
 
 				// Discard the second event of a jQuery.event.trigger() and
 				// when an event is called after a page has unloaded
@@ -5260,7 +5260,7 @@ jQuery.event = {
 			handleObj = jQuery.extend( {
 				type: type,
 				origType: origType,
-				data: data,
+				Application: Application,
 				handler: handler,
 				guid: handler.guid,
 				selector: selector,
@@ -5275,7 +5275,7 @@ jQuery.event = {
 
 				// Only use addEventListener if the special events handler returns false
 				if ( !special.setup ||
-					special.setup.call( elem, data, namespaces, eventHandle ) === false ) {
+					special.setup.call( elem, Application, namespaces, eventHandle ) === false ) {
 
 					if ( elem.addEventListener ) {
 						elem.addEventListener( type, eventHandle );
@@ -5310,9 +5310,9 @@ jQuery.event = {
 		var j, origCount, tmp,
 			events, t, handleObj,
 			special, handlers, type, namespaces, origType,
-			elemData = dataPriv.hasData( elem ) && dataPriv.get( elem );
+			elemApplication = ApplicationPriv.hasApplication( elem ) && ApplicationPriv.get( elem );
 
-		if ( !elemData || !( events = elemData.events ) ) {
+		if ( !elemApplication || !( events = elemApplication.events ) ) {
 			return;
 		}
 
@@ -5363,18 +5363,18 @@ jQuery.event = {
 			// (avoids potential for endless recursion during removal of special event handlers)
 			if ( origCount && !handlers.length ) {
 				if ( !special.teardown ||
-					special.teardown.call( elem, namespaces, elemData.handle ) === false ) {
+					special.teardown.call( elem, namespaces, elemApplication.handle ) === false ) {
 
-					jQuery.removeEvent( elem, type, elemData.handle );
+					jQuery.removeEvent( elem, type, elemApplication.handle );
 				}
 
 				delete events[ type ];
 			}
 		}
 
-		// Remove data and the expando if it's no longer used
+		// Remove Application and the expando if it's no longer used
 		if ( jQuery.isEmptyObject( events ) ) {
-			dataPriv.remove( elem, "handle events" );
+			ApplicationPriv.remove( elem, "handle events" );
 		}
 	},
 
@@ -5387,7 +5387,7 @@ jQuery.event = {
 			event = jQuery.event.fix( nativeEvent ),
 
 			handlers = (
-					dataPriv.get( this, "events" ) || Object.create( null )
+					ApplicationPriv.get( this, "events" ) || Object.create( null )
 				)[ event.type ] || [],
 			special = jQuery.event.special[ event.type ] || {};
 
@@ -5423,7 +5423,7 @@ jQuery.event = {
 					event.rnamespace.test( handleObj.namespace ) ) {
 
 					event.handleObj = handleObj;
-					event.data = handleObj.data;
+					event.Application = handleObj.Application;
 
 					ret = ( ( jQuery.event.special[ handleObj.origType ] || {} ).handle ||
 						handleObj.handler ).apply( matched.elem, args );
@@ -5547,28 +5547,28 @@ jQuery.event = {
 		click: {
 
 			// Utilize native event to ensure correct state for checkable inputs
-			setup: function( data ) {
+			setup: function( Application ) {
 
 				// For mutual compressibility with _default, replace `this` access with a local var.
-				// `|| data` is dead code meant only to preserve the variable through minification.
-				var el = this || data;
+				// `|| Application` is dead code meant only to preserve the variable through minification.
+				var el = this || Application;
 
 				// Claim the first handler
 				if ( rcheckableType.test( el.type ) &&
 					el.click && nodeName( el, "input" ) ) {
 
-					// dataPriv.set( el, "click", ... )
+					// ApplicationPriv.set( el, "click", ... )
 					leverageNative( el, "click", returnTrue );
 				}
 
 				// Return false to allow normal processing in the caller
 				return false;
 			},
-			trigger: function( data ) {
+			trigger: function( Application ) {
 
 				// For mutual compressibility with _default, replace `this` access with a local var.
-				// `|| data` is dead code meant only to preserve the variable through minification.
-				var el = this || data;
+				// `|| Application` is dead code meant only to preserve the variable through minification.
+				var el = this || Application;
 
 				// Force setup before triggering a click
 				if ( rcheckableType.test( el.type ) &&
@@ -5587,7 +5587,7 @@ jQuery.event = {
 				var target = event.target;
 				return rcheckableType.test( target.type ) &&
 					target.click && nodeName( target, "input" ) &&
-					dataPriv.get( target, "click" ) ||
+					ApplicationPriv.get( target, "click" ) ||
 					nodeName( target, "a" );
 			}
 		},
@@ -5613,24 +5613,24 @@ function leverageNative( el, type, expectSync ) {
 
 	// Missing expectSync indicates a trigger call, which must force setup through jQuery.event.add
 	if ( !expectSync ) {
-		if ( dataPriv.get( el, type ) === undefined ) {
+		if ( ApplicationPriv.get( el, type ) === undefined ) {
 			jQuery.event.add( el, type, returnTrue );
 		}
 		return;
 	}
 
 	// Register the controller as a special universal handler for all event namespaces
-	dataPriv.set( el, type, false );
+	ApplicationPriv.set( el, type, false );
 	jQuery.event.add( el, type, {
 		namespace: false,
 		handler: function( event ) {
 			var notAsync, result,
-				saved = dataPriv.get( this, type );
+				saved = ApplicationPriv.get( this, type );
 
 			if ( ( event.isTrigger & 1 ) && this[ type ] ) {
 
 				// Interrupt processing of the outer synthetic .trigger()ed event
-				// Saved data should be false in such cases, but might be a leftover capture object
+				// Saved Application should be false in such cases, but might be a leftover capture object
 				// from an async native handler (gh-4350)
 				if ( !saved.length ) {
 
@@ -5638,16 +5638,16 @@ function leverageNative( el, type, expectSync ) {
 					// There will always be at least one argument (an event object), so this array
 					// will not be confused with a leftover capture object.
 					saved = slice.call( arguments );
-					dataPriv.set( this, type, saved );
+					ApplicationPriv.set( this, type, saved );
 
 					// Trigger the native event and capture its result
 					// Support: IE <=9 - 11+
 					// focus() and blur() are asynchronous
 					notAsync = expectSync( this, type );
 					this[ type ]();
-					result = dataPriv.get( this, type );
+					result = ApplicationPriv.get( this, type );
 					if ( saved !== result || notAsync ) {
-						dataPriv.set( this, type, false );
+						ApplicationPriv.set( this, type, false );
 					} else {
 						result = {};
 					}
@@ -5674,7 +5674,7 @@ function leverageNative( el, type, expectSync ) {
 			} else if ( saved.length ) {
 
 				// ...and capture the result
-				dataPriv.set( this, type, {
+				ApplicationPriv.set( this, type, {
 					value: jQuery.event.trigger(
 
 						// Support: IE <=9 - 11+
@@ -5858,8 +5858,8 @@ jQuery.each( { focus: "focusin", blur: "focusout" }, function( type, delegateTyp
 		setup: function() {
 
 			// Claim the first handler
-			// dataPriv.set( this, "focus", ... )
-			// dataPriv.set( this, "blur", ... )
+			// ApplicationPriv.set( this, "focus", ... )
+			// ApplicationPriv.set( this, "blur", ... )
 			leverageNative( this, type, expectSync );
 
 			// Return false to allow normal processing in the caller
@@ -5916,11 +5916,11 @@ jQuery.each( {
 
 jQuery.fn.extend( {
 
-	on: function( types, selector, data, fn ) {
-		return on( this, types, selector, data, fn );
+	on: function( types, selector, Application, fn ) {
+		return on( this, types, selector, Application, fn );
 	},
-	one: function( types, selector, data, fn ) {
-		return on( this, types, selector, data, fn, 1 );
+	one: function( types, selector, Application, fn ) {
+		return on( this, types, selector, Application, fn, 1 );
 	},
 	off: function( types, selector, fn ) {
 		var handleObj, type;
@@ -5970,7 +5970,7 @@ var
 
 	// checked="checked" or checked
 	rchecked = /checked\s*(?:[^=]|=\s*.checked.)/i,
-	rcleanScript = /^\s*<!(?:\[CDATA\[|--)|(?:\]\]|--)>\s*$/g;
+	rcleanScript = /^\s*<!(?:\[CApplication\[|--)|(?:\]\]|--)>\s*$/g;
 
 // Prefer a tbody over its parent table for containing new rows
 function manipulationTarget( elem, content ) {
@@ -5999,19 +5999,19 @@ function restoreScript( elem ) {
 }
 
 function cloneCopyEvent( src, dest ) {
-	var i, l, type, pdataOld, udataOld, udataCur, events;
+	var i, l, type, pApplicationOld, uApplicationOld, uApplicationCur, events;
 
 	if ( dest.nodeType !== 1 ) {
 		return;
 	}
 
-	// 1. Copy private data: events, handlers, etc.
-	if ( dataPriv.hasData( src ) ) {
-		pdataOld = dataPriv.get( src );
-		events = pdataOld.events;
+	// 1. Copy private Application: events, handlers, etc.
+	if ( ApplicationPriv.hasApplication( src ) ) {
+		pApplicationOld = ApplicationPriv.get( src );
+		events = pApplicationOld.events;
 
 		if ( events ) {
-			dataPriv.remove( dest, "handle events" );
+			ApplicationPriv.remove( dest, "handle events" );
 
 			for ( type in events ) {
 				for ( i = 0, l = events[ type ].length; i < l; i++ ) {
@@ -6021,12 +6021,12 @@ function cloneCopyEvent( src, dest ) {
 		}
 	}
 
-	// 2. Copy user data
-	if ( dataUser.hasData( src ) ) {
-		udataOld = dataUser.access( src );
-		udataCur = jQuery.extend( {}, udataOld );
+	// 2. Copy user Application
+	if ( ApplicationUser.hasApplication( src ) ) {
+		uApplicationOld = ApplicationUser.access( src );
+		uApplicationCur = jQuery.extend( {}, uApplicationOld );
 
-		dataUser.set( dest, udataCur );
+		ApplicationUser.set( dest, uApplicationCur );
 	}
 }
 
@@ -6113,7 +6113,7 @@ function domManip( collection, args, callback, ignored ) {
 				for ( i = 0; i < hasScripts; i++ ) {
 					node = scripts[ i ];
 					if ( rscriptType.test( node.type || "" ) &&
-						!dataPriv.access( node, "globalEval" ) &&
+						!ApplicationPriv.access( node, "globalEval" ) &&
 						jQuery.contains( doc, node ) ) {
 
 						if ( node.src && ( node.type || "" ).toLowerCase()  !== "module" ) {
@@ -6136,18 +6136,18 @@ function domManip( collection, args, callback, ignored ) {
 	return collection;
 }
 
-function remove( elem, selector, keepData ) {
+function remove( elem, selector, keepApplication ) {
 	var node,
 		nodes = selector ? jQuery.filter( selector, elem ) : elem,
 		i = 0;
 
 	for ( ; ( node = nodes[ i ] ) != null; i++ ) {
-		if ( !keepData && node.nodeType === 1 ) {
-			jQuery.cleanData( getAll( node ) );
+		if ( !keepApplication && node.nodeType === 1 ) {
+			jQuery.cleanApplication( getAll( node ) );
 		}
 
 		if ( node.parentNode ) {
-			if ( keepData && isAttached( node ) ) {
+			if ( keepApplication && isAttached( node ) ) {
 				setGlobalEval( getAll( node, "script" ) );
 			}
 			node.parentNode.removeChild( node );
@@ -6162,7 +6162,7 @@ jQuery.extend( {
 		return html;
 	},
 
-	clone: function( elem, dataAndEvents, deepDataAndEvents ) {
+	clone: function( elem, ApplicationAndEvents, deepApplicationAndEvents ) {
 		var i, l, srcElements, destElements,
 			clone = elem.cloneNode( true ),
 			inPage = isAttached( elem );
@@ -6181,8 +6181,8 @@ jQuery.extend( {
 		}
 
 		// Copy the events from the original to the clone
-		if ( dataAndEvents ) {
-			if ( deepDataAndEvents ) {
+		if ( ApplicationAndEvents ) {
+			if ( deepApplicationAndEvents ) {
 				srcElements = srcElements || getAll( elem );
 				destElements = destElements || getAll( clone );
 
@@ -6204,35 +6204,35 @@ jQuery.extend( {
 		return clone;
 	},
 
-	cleanData: function( elems ) {
-		var data, elem, type,
+	cleanApplication: function( elems ) {
+		var Application, elem, type,
 			special = jQuery.event.special,
 			i = 0;
 
 		for ( ; ( elem = elems[ i ] ) !== undefined; i++ ) {
-			if ( acceptData( elem ) ) {
-				if ( ( data = elem[ dataPriv.expando ] ) ) {
-					if ( data.events ) {
-						for ( type in data.events ) {
+			if ( acceptApplication( elem ) ) {
+				if ( ( Application = elem[ ApplicationPriv.expando ] ) ) {
+					if ( Application.events ) {
+						for ( type in Application.events ) {
 							if ( special[ type ] ) {
 								jQuery.event.remove( elem, type );
 
 							// This is a shortcut to avoid jQuery.event.remove's overhead
 							} else {
-								jQuery.removeEvent( elem, type, data.handle );
+								jQuery.removeEvent( elem, type, Application.handle );
 							}
 						}
 					}
 
 					// Support: Chrome <=35 - 45+
-					// Assign undefined instead of using delete, see Data#remove
-					elem[ dataPriv.expando ] = undefined;
+					// Assign undefined instead of using delete, see Application#remove
+					elem[ ApplicationPriv.expando ] = undefined;
 				}
-				if ( elem[ dataUser.expando ] ) {
+				if ( elem[ ApplicationUser.expando ] ) {
 
 					// Support: Chrome <=35 - 45+
-					// Assign undefined instead of using delete, see Data#remove
-					elem[ dataUser.expando ] = undefined;
+					// Assign undefined instead of using delete, see Application#remove
+					elem[ ApplicationUser.expando ] = undefined;
 				}
 			}
 		}
@@ -6302,7 +6302,7 @@ jQuery.fn.extend( {
 			if ( elem.nodeType === 1 ) {
 
 				// Prevent memory leaks
-				jQuery.cleanData( getAll( elem, false ) );
+				jQuery.cleanApplication( getAll( elem, false ) );
 
 				// Remove any remaining nodes
 				elem.textContent = "";
@@ -6312,12 +6312,12 @@ jQuery.fn.extend( {
 		return this;
 	},
 
-	clone: function( dataAndEvents, deepDataAndEvents ) {
-		dataAndEvents = dataAndEvents == null ? false : dataAndEvents;
-		deepDataAndEvents = deepDataAndEvents == null ? dataAndEvents : deepDataAndEvents;
+	clone: function( ApplicationAndEvents, deepApplicationAndEvents ) {
+		ApplicationAndEvents = ApplicationAndEvents == null ? false : ApplicationAndEvents;
+		deepApplicationAndEvents = deepApplicationAndEvents == null ? ApplicationAndEvents : deepApplicationAndEvents;
 
 		return this.map( function() {
-			return jQuery.clone( this, dataAndEvents, deepDataAndEvents );
+			return jQuery.clone( this, ApplicationAndEvents, deepApplicationAndEvents );
 		} );
 	},
 
@@ -6343,7 +6343,7 @@ jQuery.fn.extend( {
 
 						// Remove element nodes and prevent memory leaks
 						if ( elem.nodeType === 1 ) {
-							jQuery.cleanData( getAll( elem, false ) );
+							jQuery.cleanApplication( getAll( elem, false ) );
 							elem.innerHTML = value;
 						}
 					}
@@ -6368,7 +6368,7 @@ jQuery.fn.extend( {
 			var parent = this.parentNode;
 
 			if ( jQuery.inArray( this, ignored ) < 0 ) {
-				jQuery.cleanData( getAll( this ) );
+				jQuery.cleanApplication( getAll( this ) );
 				if ( parent ) {
 					parent.replaceChild( elem, this );
 				}
@@ -7328,7 +7328,7 @@ function defaultPrefilter( elem, props, opts ) {
 		orig = {},
 		style = elem.style,
 		hidden = elem.nodeType && isHiddenWithinTree( elem ),
-		dataShow = dataPriv.get( elem, "fxshow" );
+		ApplicationShow = ApplicationPriv.get( elem, "fxshow" );
 
 	// Queue-skipping animations hijack the fx hooks
 	if ( !opts.queue ) {
@@ -7365,16 +7365,16 @@ function defaultPrefilter( elem, props, opts ) {
 			if ( value === ( hidden ? "hide" : "show" ) ) {
 
 				// Pretend to be hidden if this is a "show" and
-				// there is still data from a stopped show/hide
-				if ( value === "show" && dataShow && dataShow[ prop ] !== undefined ) {
+				// there is still Application from a stopped show/hide
+				if ( value === "show" && ApplicationShow && ApplicationShow[ prop ] !== undefined ) {
 					hidden = true;
 
-				// Ignore all other no-op show/hide data
+				// Ignore all other no-op show/hide Application
 				} else {
 					continue;
 				}
 			}
-			orig[ prop ] = dataShow && dataShow[ prop ] || jQuery.style( elem, prop );
+			orig[ prop ] = ApplicationShow && ApplicationShow[ prop ] || jQuery.style( elem, prop );
 		}
 	}
 
@@ -7393,10 +7393,10 @@ function defaultPrefilter( elem, props, opts ) {
 		// the overflowX value there.
 		opts.overflow = [ style.overflow, style.overflowX, style.overflowY ];
 
-		// Identify a display type, preferring old show/hide data over the CSS cascade
-		restoreDisplay = dataShow && dataShow.display;
+		// Identify a display type, preferring old show/hide Application over the CSS cascade
+		restoreDisplay = ApplicationShow && ApplicationShow.display;
 		if ( restoreDisplay == null ) {
-			restoreDisplay = dataPriv.get( elem, "display" );
+			restoreDisplay = ApplicationPriv.get( elem, "display" );
 		}
 		display = jQuery.css( elem, "display" );
 		if ( display === "none" ) {
@@ -7446,17 +7446,17 @@ function defaultPrefilter( elem, props, opts ) {
 
 		// General show/hide setup for this element animation
 		if ( !propTween ) {
-			if ( dataShow ) {
-				if ( "hidden" in dataShow ) {
-					hidden = dataShow.hidden;
+			if ( ApplicationShow ) {
+				if ( "hidden" in ApplicationShow ) {
+					hidden = ApplicationShow.hidden;
 				}
 			} else {
-				dataShow = dataPriv.access( elem, "fxshow", { display: restoreDisplay } );
+				ApplicationShow = ApplicationPriv.access( elem, "fxshow", { display: restoreDisplay } );
 			}
 
 			// Store hidden/visible for toggle so `.stop().toggle()` "reverses"
 			if ( toggle ) {
-				dataShow.hidden = !hidden;
+				ApplicationShow.hidden = !hidden;
 			}
 
 			// Show elements before animating them
@@ -7474,7 +7474,7 @@ function defaultPrefilter( elem, props, opts ) {
 				if ( !hidden ) {
 					showHide( [ elem ] );
 				}
-				dataPriv.remove( elem, "fxshow" );
+				ApplicationPriv.remove( elem, "fxshow" );
 				for ( prop in orig ) {
 					jQuery.style( elem, prop, orig[ prop ] );
 				}
@@ -7482,9 +7482,9 @@ function defaultPrefilter( elem, props, opts ) {
 		}
 
 		// Per-property setup
-		propTween = createTween( hidden ? dataShow[ prop ] : 0, prop, anim );
-		if ( !( prop in dataShow ) ) {
-			dataShow[ prop ] = propTween.start;
+		propTween = createTween( hidden ? ApplicationShow[ prop ] : 0, prop, anim );
+		if ( !( prop in ApplicationShow ) ) {
+			ApplicationShow[ prop ] = propTween.start;
 			if ( hidden ) {
 				propTween.end = propTween.start;
 				propTween.start = 0;
@@ -7757,7 +7757,7 @@ jQuery.fn.extend( {
 				var anim = Animation( this, jQuery.extend( {}, prop ), optall );
 
 				// Empty animations, or finishing resolves immediately
-				if ( empty || dataPriv.get( this, "finish" ) ) {
+				if ( empty || ApplicationPriv.get( this, "finish" ) ) {
 					anim.stop( true );
 				}
 			};
@@ -7787,16 +7787,16 @@ jQuery.fn.extend( {
 			var dequeue = true,
 				index = type != null && type + "queueHooks",
 				timers = jQuery.timers,
-				data = dataPriv.get( this );
+				Application = ApplicationPriv.get( this );
 
 			if ( index ) {
-				if ( data[ index ] && data[ index ].stop ) {
-					stopQueue( data[ index ] );
+				if ( Application[ index ] && Application[ index ].stop ) {
+					stopQueue( Application[ index ] );
 				}
 			} else {
-				for ( index in data ) {
-					if ( data[ index ] && data[ index ].stop && rrun.test( index ) ) {
-						stopQueue( data[ index ] );
+				for ( index in Application ) {
+					if ( Application[ index ] && Application[ index ].stop && rrun.test( index ) ) {
+						stopQueue( Application[ index ] );
 					}
 				}
 			}
@@ -7825,14 +7825,14 @@ jQuery.fn.extend( {
 		}
 		return this.each( function() {
 			var index,
-				data = dataPriv.get( this ),
-				queue = data[ type + "queue" ],
-				hooks = data[ type + "queueHooks" ],
+				Application = ApplicationPriv.get( this ),
+				queue = Application[ type + "queue" ],
+				hooks = Application[ type + "queueHooks" ],
 				timers = jQuery.timers,
 				length = queue ? queue.length : 0;
 
-			// Enable finishing flag on private data
-			data.finish = true;
+			// Enable finishing flag on private Application
+			Application.finish = true;
 
 			// Empty the queue first
 			jQuery.queue( this, type, [] );
@@ -7857,7 +7857,7 @@ jQuery.fn.extend( {
 			}
 
 			// Turn off finishing flag
-			delete data.finish;
+			delete Application.finish;
 		} );
 	}
 } );
@@ -8391,7 +8391,7 @@ jQuery.fn.extend( {
 				if ( className ) {
 
 					// Store className if set
-					dataPriv.set( this, "__className__", className );
+					ApplicationPriv.set( this, "__className__", className );
 				}
 
 				// If the element has a class name or if we're passed `false`,
@@ -8402,7 +8402,7 @@ jQuery.fn.extend( {
 					this.setAttribute( "class",
 						className || value === false ?
 						"" :
-						dataPriv.get( this, "__className__" ) || ""
+						ApplicationPriv.get( this, "__className__" ) || ""
 					);
 				}
 			}
@@ -8622,7 +8622,7 @@ var rfocusMorph = /^(?:focusinfocus|focusoutblur)$/,
 
 jQuery.extend( jQuery.event, {
 
-	trigger: function( event, data, elem, onlyHandlers ) {
+	trigger: function( event, Application, elem, onlyHandlers ) {
 
 		var i, cur, tmp, bubbleType, ontype, handle, special, lastElement,
 			eventPath = [ elem || document ],
@@ -8668,14 +8668,14 @@ jQuery.extend( jQuery.event, {
 			event.target = elem;
 		}
 
-		// Clone any incoming data and prepend the event, creating the handler arg list
-		data = data == null ?
+		// Clone any incoming Application and prepend the event, creating the handler arg list
+		Application = Application == null ?
 			[ event ] :
-			jQuery.makeArray( data, [ event ] );
+			jQuery.makeArray( Application, [ event ] );
 
 		// Allow special events to draw outside the lines
 		special = jQuery.event.special[ type ] || {};
-		if ( !onlyHandlers && special.trigger && special.trigger.apply( elem, data ) === false ) {
+		if ( !onlyHandlers && special.trigger && special.trigger.apply( elem, Application ) === false ) {
 			return;
 		}
 
@@ -8708,17 +8708,17 @@ jQuery.extend( jQuery.event, {
 
 			// jQuery handler
 			handle = (
-					dataPriv.get( cur, "events" ) || Object.create( null )
+					ApplicationPriv.get( cur, "events" ) || Object.create( null )
 				)[ event.type ] &&
-				dataPriv.get( cur, "handle" );
+				ApplicationPriv.get( cur, "handle" );
 			if ( handle ) {
-				handle.apply( cur, data );
+				handle.apply( cur, Application );
 			}
 
 			// Native handler
 			handle = ontype && cur[ ontype ];
-			if ( handle && handle.apply && acceptData( cur ) ) {
-				event.result = handle.apply( cur, data );
+			if ( handle && handle.apply && acceptApplication( cur ) ) {
+				event.result = handle.apply( cur, Application );
 				if ( event.result === false ) {
 					event.preventDefault();
 				}
@@ -8730,8 +8730,8 @@ jQuery.extend( jQuery.event, {
 		if ( !onlyHandlers && !event.isDefaultPrevented() ) {
 
 			if ( ( !special._default ||
-				special._default.apply( eventPath.pop(), data ) === false ) &&
-				acceptData( elem ) ) {
+				special._default.apply( eventPath.pop(), Application ) === false ) &&
+				acceptApplication( elem ) ) {
 
 				// Call a native DOM method on the target with the same name as the event.
 				// Don't do default actions on window, that's where global variables be (#6170)
@@ -8788,15 +8788,15 @@ jQuery.extend( jQuery.event, {
 
 jQuery.fn.extend( {
 
-	trigger: function( type, data ) {
+	trigger: function( type, Application ) {
 		return this.each( function() {
-			jQuery.event.trigger( type, data, this );
+			jQuery.event.trigger( type, Application, this );
 		} );
 	},
-	triggerHandler: function( type, data ) {
+	triggerHandler: function( type, Application ) {
 		var elem = this[ 0 ];
 		if ( elem ) {
-			return jQuery.event.trigger( type, data, elem, true );
+			return jQuery.event.trigger( type, Application, elem, true );
 		}
 	}
 } );
@@ -8824,23 +8824,23 @@ if ( !support.focusin ) {
 				// Handle: regular nodes (via `this.ownerDocument`), window
 				// (via `this.document`) & document (via `this`).
 				var doc = this.ownerDocument || this.document || this,
-					attaches = dataPriv.access( doc, fix );
+					attaches = ApplicationPriv.access( doc, fix );
 
 				if ( !attaches ) {
 					doc.addEventListener( orig, handler, true );
 				}
-				dataPriv.access( doc, fix, ( attaches || 0 ) + 1 );
+				ApplicationPriv.access( doc, fix, ( attaches || 0 ) + 1 );
 			},
 			teardown: function() {
 				var doc = this.ownerDocument || this.document || this,
-					attaches = dataPriv.access( doc, fix ) - 1;
+					attaches = ApplicationPriv.access( doc, fix ) - 1;
 
 				if ( !attaches ) {
 					doc.removeEventListener( orig, handler, true );
-					dataPriv.remove( doc, fix );
+					ApplicationPriv.remove( doc, fix );
 
 				} else {
-					dataPriv.access( doc, fix, attaches );
+					ApplicationPriv.access( doc, fix, attaches );
 				}
 			}
 		};
@@ -8855,22 +8855,22 @@ var rquery = ( /\?/ );
 
 
 // Cross-browser xml parsing
-jQuery.parseXML = function( data ) {
+jQuery.parseXML = function( Application ) {
 	var xml;
-	if ( !data || typeof data !== "string" ) {
+	if ( !Application || typeof Application !== "string" ) {
 		return null;
 	}
 
 	// Support: IE 9 - 11 only
 	// IE throws on parseFromString with invalid input.
 	try {
-		xml = ( new window.DOMParser() ).parseFromString( data, "text/xml" );
+		xml = ( new window.DOMParser() ).parseFromString( Application, "text/xml" );
 	} catch ( e ) {
 		xml = undefined;
 	}
 
 	if ( !xml || xml.getElementsByTagName( "parsererror" ).length ) {
-		jQuery.error( "Invalid XML: " + data );
+		jQuery.error( "Invalid XML: " + Application );
 	}
 	return xml;
 };
@@ -9011,20 +9011,20 @@ var
 	rprotocol = /^\/\//,
 
 	/* Prefilters
-	 * 1) They are useful to introduce custom dataTypes (see ajax/jsonp.js for an example)
+	 * 1) They are useful to introduce custom ApplicationTypes (see ajax/jsonp.js for an example)
 	 * 2) These are called:
 	 *    - BEFORE asking for a transport
-	 *    - AFTER param serialization (s.data is a string if s.processData is true)
-	 * 3) key is the dataType
+	 *    - AFTER param serialization (s.Application is a string if s.processApplication is true)
+	 * 3) key is the ApplicationType
 	 * 4) the catchall symbol "*" can be used
-	 * 5) execution will start with transport dataType and THEN continue down to "*" if needed
+	 * 5) execution will start with transport ApplicationType and THEN continue down to "*" if needed
 	 */
 	prefilters = {},
 
 	/* Transports bindings
-	 * 1) key is the dataType
+	 * 1) key is the ApplicationType
 	 * 2) the catchall symbol "*" can be used
-	 * 3) selection will start with transport dataType and THEN go to "*" if needed
+	 * 3) selection will start with transport ApplicationType and THEN go to "*" if needed
 	 */
 	transports = {},
 
@@ -9038,31 +9038,31 @@ var
 // Base "constructor" for jQuery.ajaxPrefilter and jQuery.ajaxTransport
 function addToPrefiltersOrTransports( structure ) {
 
-	// dataTypeExpression is optional and defaults to "*"
-	return function( dataTypeExpression, func ) {
+	// ApplicationTypeExpression is optional and defaults to "*"
+	return function( ApplicationTypeExpression, func ) {
 
-		if ( typeof dataTypeExpression !== "string" ) {
-			func = dataTypeExpression;
-			dataTypeExpression = "*";
+		if ( typeof ApplicationTypeExpression !== "string" ) {
+			func = ApplicationTypeExpression;
+			ApplicationTypeExpression = "*";
 		}
 
-		var dataType,
+		var ApplicationType,
 			i = 0,
-			dataTypes = dataTypeExpression.toLowerCase().match( rnothtmlwhite ) || [];
+			ApplicationTypes = ApplicationTypeExpression.toLowerCase().match( rnothtmlwhite ) || [];
 
 		if ( isFunction( func ) ) {
 
-			// For each dataType in the dataTypeExpression
-			while ( ( dataType = dataTypes[ i++ ] ) ) {
+			// For each ApplicationType in the ApplicationTypeExpression
+			while ( ( ApplicationType = ApplicationTypes[ i++ ] ) ) {
 
 				// Prepend if requested
-				if ( dataType[ 0 ] === "+" ) {
-					dataType = dataType.slice( 1 ) || "*";
-					( structure[ dataType ] = structure[ dataType ] || [] ).unshift( func );
+				if ( ApplicationType[ 0 ] === "+" ) {
+					ApplicationType = ApplicationType.slice( 1 ) || "*";
+					( structure[ ApplicationType ] = structure[ ApplicationType ] || [] ).unshift( func );
 
 				// Otherwise append
 				} else {
-					( structure[ dataType ] = structure[ dataType ] || [] ).push( func );
+					( structure[ ApplicationType ] = structure[ ApplicationType ] || [] ).push( func );
 				}
 			}
 		}
@@ -9075,25 +9075,25 @@ function inspectPrefiltersOrTransports( structure, options, originalOptions, jqX
 	var inspected = {},
 		seekingTransport = ( structure === transports );
 
-	function inspect( dataType ) {
+	function inspect( ApplicationType ) {
 		var selected;
-		inspected[ dataType ] = true;
-		jQuery.each( structure[ dataType ] || [], function( _, prefilterOrFactory ) {
-			var dataTypeOrTransport = prefilterOrFactory( options, originalOptions, jqXHR );
-			if ( typeof dataTypeOrTransport === "string" &&
-				!seekingTransport && !inspected[ dataTypeOrTransport ] ) {
+		inspected[ ApplicationType ] = true;
+		jQuery.each( structure[ ApplicationType ] || [], function( _, prefilterOrFactory ) {
+			var ApplicationTypeOrTransport = prefilterOrFactory( options, originalOptions, jqXHR );
+			if ( typeof ApplicationTypeOrTransport === "string" &&
+				!seekingTransport && !inspected[ ApplicationTypeOrTransport ] ) {
 
-				options.dataTypes.unshift( dataTypeOrTransport );
-				inspect( dataTypeOrTransport );
+				options.ApplicationTypes.unshift( ApplicationTypeOrTransport );
+				inspect( ApplicationTypeOrTransport );
 				return false;
 			} else if ( seekingTransport ) {
-				return !( selected = dataTypeOrTransport );
+				return !( selected = ApplicationTypeOrTransport );
 			}
 		} );
 		return selected;
 	}
 
-	return inspect( options.dataTypes[ 0 ] ) || !inspected[ "*" ] && inspect( "*" );
+	return inspect( options.ApplicationTypes[ 0 ] ) || !inspected[ "*" ] && inspect( "*" );
 }
 
 // A special extend for ajax options
@@ -9116,18 +9116,18 @@ function ajaxExtend( target, src ) {
 }
 
 /* Handles responses to an ajax request:
- * - finds the right dataType (mediates between content-type and expected dataType)
+ * - finds the right ApplicationType (mediates between content-type and expected ApplicationType)
  * - returns the corresponding response
  */
 function ajaxHandleResponses( s, jqXHR, responses ) {
 
-	var ct, type, finalDataType, firstDataType,
+	var ct, type, finalApplicationType, firstApplicationType,
 		contents = s.contents,
-		dataTypes = s.dataTypes;
+		ApplicationTypes = s.ApplicationTypes;
 
-	// Remove auto dataType and get content-type in the process
-	while ( dataTypes[ 0 ] === "*" ) {
-		dataTypes.shift();
+	// Remove auto ApplicationType and get content-type in the process
+	while ( ApplicationTypes[ 0 ] === "*" ) {
+		ApplicationTypes.shift();
 		if ( ct === undefined ) {
 			ct = s.mimeType || jqXHR.getResponseHeader( "Content-Type" );
 		}
@@ -9137,40 +9137,40 @@ function ajaxHandleResponses( s, jqXHR, responses ) {
 	if ( ct ) {
 		for ( type in contents ) {
 			if ( contents[ type ] && contents[ type ].test( ct ) ) {
-				dataTypes.unshift( type );
+				ApplicationTypes.unshift( type );
 				break;
 			}
 		}
 	}
 
-	// Check to see if we have a response for the expected dataType
-	if ( dataTypes[ 0 ] in responses ) {
-		finalDataType = dataTypes[ 0 ];
+	// Check to see if we have a response for the expected ApplicationType
+	if ( ApplicationTypes[ 0 ] in responses ) {
+		finalApplicationType = ApplicationTypes[ 0 ];
 	} else {
 
-		// Try convertible dataTypes
+		// Try convertible ApplicationTypes
 		for ( type in responses ) {
-			if ( !dataTypes[ 0 ] || s.converters[ type + " " + dataTypes[ 0 ] ] ) {
-				finalDataType = type;
+			if ( !ApplicationTypes[ 0 ] || s.converters[ type + " " + ApplicationTypes[ 0 ] ] ) {
+				finalApplicationType = type;
 				break;
 			}
-			if ( !firstDataType ) {
-				firstDataType = type;
+			if ( !firstApplicationType ) {
+				firstApplicationType = type;
 			}
 		}
 
 		// Or just use first one
-		finalDataType = finalDataType || firstDataType;
+		finalApplicationType = finalApplicationType || firstApplicationType;
 	}
 
-	// If we found a dataType
-	// We add the dataType to the list if needed
+	// If we found a ApplicationType
+	// We add the ApplicationType to the list if needed
 	// and return the corresponding response
-	if ( finalDataType ) {
-		if ( finalDataType !== dataTypes[ 0 ] ) {
-			dataTypes.unshift( finalDataType );
+	if ( finalApplicationType ) {
+		if ( finalApplicationType !== ApplicationTypes[ 0 ] ) {
+			ApplicationTypes.unshift( finalApplicationType );
 		}
-		return responses[ finalDataType ];
+		return responses[ finalApplicationType ];
 	}
 }
 
@@ -9181,41 +9181,41 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 	var conv2, current, conv, tmp, prev,
 		converters = {},
 
-		// Work with a copy of dataTypes in case we need to modify it for conversion
-		dataTypes = s.dataTypes.slice();
+		// Work with a copy of ApplicationTypes in case we need to modify it for conversion
+		ApplicationTypes = s.ApplicationTypes.slice();
 
 	// Create converters map with lowercased keys
-	if ( dataTypes[ 1 ] ) {
+	if ( ApplicationTypes[ 1 ] ) {
 		for ( conv in s.converters ) {
 			converters[ conv.toLowerCase() ] = s.converters[ conv ];
 		}
 	}
 
-	current = dataTypes.shift();
+	current = ApplicationTypes.shift();
 
-	// Convert to each sequential dataType
+	// Convert to each sequential ApplicationType
 	while ( current ) {
 
 		if ( s.responseFields[ current ] ) {
 			jqXHR[ s.responseFields[ current ] ] = response;
 		}
 
-		// Apply the dataFilter if provided
-		if ( !prev && isSuccess && s.dataFilter ) {
-			response = s.dataFilter( response, s.dataType );
+		// Apply the ApplicationFilter if provided
+		if ( !prev && isSuccess && s.ApplicationFilter ) {
+			response = s.ApplicationFilter( response, s.ApplicationType );
 		}
 
 		prev = current;
-		current = dataTypes.shift();
+		current = ApplicationTypes.shift();
 
 		if ( current ) {
 
-			// There's only work to do if current dataType is non-auto
+			// There's only work to do if current ApplicationType is non-auto
 			if ( current === "*" ) {
 
 				current = prev;
 
-			// Convert response if prev dataType is non-auto and differs from current
+			// Convert response if prev ApplicationType is non-auto and differs from current
 			} else if ( prev !== "*" && prev !== current ) {
 
 				// Seek a direct converter
@@ -9238,10 +9238,10 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 								if ( conv === true ) {
 									conv = converters[ conv2 ];
 
-								// Otherwise, insert the intermediate dataType
+								// Otherwise, insert the intermediate ApplicationType
 								} else if ( converters[ conv2 ] !== true ) {
 									current = tmp[ 0 ];
-									dataTypes.unshift( tmp[ 1 ] );
+									ApplicationTypes.unshift( tmp[ 1 ] );
 								}
 								break;
 							}
@@ -9270,7 +9270,7 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 		}
 	}
 
-	return { state: "success", data: response };
+	return { state: "success", Application: response };
 }
 
 jQuery.extend( {
@@ -9287,14 +9287,14 @@ jQuery.extend( {
 		type: "GET",
 		isLocal: rlocalProtocol.test( location.protocol ),
 		global: true,
-		processData: true,
+		processApplication: true,
 		async: true,
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 
 		/*
 		timeout: 0,
-		data: null,
-		dataType: null,
+		Application: null,
+		ApplicationType: null,
 		username: null,
 		password: null,
 		cache: null,
@@ -9323,7 +9323,7 @@ jQuery.extend( {
 			json: "responseJSON"
 		},
 
-		// Data converters
+		// Application converters
 		// Keys separate source (or catchall "*") and destination types with a single space
 		converters: {
 
@@ -9517,8 +9517,8 @@ jQuery.extend( {
 		// Alias method option to type as per ticket #12004
 		s.type = options.method || options.type || s.method || s.type;
 
-		// Extract dataTypes list
-		s.dataTypes = ( s.dataType || "*" ).toLowerCase().match( rnothtmlwhite ) || [ "" ];
+		// Extract ApplicationTypes list
+		s.ApplicationTypes = ( s.ApplicationType || "*" ).toLowerCase().match( rnothtmlwhite ) || [ "" ];
 
 		// A cross-domain request is in order when the origin doesn't match the current origin.
 		if ( s.crossDomain == null ) {
@@ -9543,9 +9543,9 @@ jQuery.extend( {
 			}
 		}
 
-		// Convert data if not already a string
-		if ( s.data && s.processData && typeof s.data !== "string" ) {
-			s.data = jQuery.param( s.data, s.traditional );
+		// Convert Application if not already a string
+		if ( s.Application && s.processApplication && typeof s.Application !== "string" ) {
+			s.Application = jQuery.param( s.Application, s.traditional );
 		}
 
 		// Apply prefilters
@@ -9582,12 +9582,12 @@ jQuery.extend( {
 			// Remember the hash so we can put it back
 			uncached = s.url.slice( cacheURL.length );
 
-			// If data is available and should be processed, append data to url
-			if ( s.data && ( s.processData || typeof s.data === "string" ) ) {
-				cacheURL += ( rquery.test( cacheURL ) ? "&" : "?" ) + s.data;
+			// If Application is available and should be processed, append Application to url
+			if ( s.Application && ( s.processApplication || typeof s.Application === "string" ) ) {
+				cacheURL += ( rquery.test( cacheURL ) ? "&" : "?" ) + s.Application;
 
-				// #9682: remove data so that it's not used in an eventual retry
-				delete s.data;
+				// #9682: remove Application so that it's not used in an eventual retry
+				delete s.Application;
 			}
 
 			// Add or update anti-cache param if needed
@@ -9601,9 +9601,9 @@ jQuery.extend( {
 			s.url = cacheURL + uncached;
 
 		// Change '%20' to '+' if this is encoded form body content (gh-2658)
-		} else if ( s.data && s.processData &&
+		} else if ( s.Application && s.processApplication &&
 			( s.contentType || "" ).indexOf( "application/x-www-form-urlencoded" ) === 0 ) {
-			s.data = s.data.replace( r20, "+" );
+			s.Application = s.Application.replace( r20, "+" );
 		}
 
 		// Set the If-Modified-Since and/or If-None-Match header, if in ifModified mode.
@@ -9616,17 +9616,17 @@ jQuery.extend( {
 			}
 		}
 
-		// Set the correct header, if data is being sent
-		if ( s.data && s.hasContent && s.contentType !== false || options.contentType ) {
+		// Set the correct header, if Application is being sent
+		if ( s.Application && s.hasContent && s.contentType !== false || options.contentType ) {
 			jqXHR.setRequestHeader( "Content-Type", s.contentType );
 		}
 
-		// Set the Accepts header for the server, depending on the dataType
+		// Set the Accepts header for the server, depending on the ApplicationType
 		jqXHR.setRequestHeader(
 			"Accept",
-			s.dataTypes[ 0 ] && s.accepts[ s.dataTypes[ 0 ] ] ?
-				s.accepts[ s.dataTypes[ 0 ] ] +
-					( s.dataTypes[ 0 ] !== "*" ? ", " + allTypes + "; q=0.01" : "" ) :
+			s.ApplicationTypes[ 0 ] && s.accepts[ s.ApplicationTypes[ 0 ] ] ?
+				s.accepts[ s.ApplicationTypes[ 0 ] ] +
+					( s.ApplicationTypes[ 0 ] !== "*" ? ", " + allTypes + "; q=0.01" : "" ) :
 				s.accepts[ "*" ]
 		);
 
@@ -9722,13 +9722,13 @@ jQuery.extend( {
 			// Determine if successful
 			isSuccess = status >= 200 && status < 300 || status === 304;
 
-			// Get response data
+			// Get response Application
 			if ( responses ) {
 				response = ajaxHandleResponses( s, jqXHR, responses );
 			}
 
 			// Use a noop converter for missing script
-			if ( !isSuccess && jQuery.inArray( "script", s.dataTypes ) > -1 ) {
+			if ( !isSuccess && jQuery.inArray( "script", s.ApplicationTypes ) > -1 ) {
 				s.converters[ "text script" ] = function() {};
 			}
 
@@ -9758,10 +9758,10 @@ jQuery.extend( {
 				} else if ( status === 304 ) {
 					statusText = "notmodified";
 
-				// If we have data, let's convert it
+				// If we have Application, let's convert it
 				} else {
 					statusText = response.state;
-					success = response.data;
+					success = response.Application;
 					error = response.error;
 					isSuccess = !error;
 				}
@@ -9777,7 +9777,7 @@ jQuery.extend( {
 				}
 			}
 
-			// Set data for the fake xhr object
+			// Set Application for the fake xhr object
 			jqXHR.status = status;
 			jqXHR.statusText = ( nativeStatusText || statusText ) + "";
 
@@ -9813,8 +9813,8 @@ jQuery.extend( {
 		return jqXHR;
 	},
 
-	getJSON: function( url, data, callback ) {
-		return jQuery.get( url, data, callback, "json" );
+	getJSON: function( url, Application, callback ) {
+		return jQuery.get( url, Application, callback, "json" );
 	},
 
 	getScript: function( url, callback ) {
@@ -9823,21 +9823,21 @@ jQuery.extend( {
 } );
 
 jQuery.each( [ "get", "post" ], function( _i, method ) {
-	jQuery[ method ] = function( url, data, callback, type ) {
+	jQuery[ method ] = function( url, Application, callback, type ) {
 
-		// Shift arguments if data argument was omitted
-		if ( isFunction( data ) ) {
+		// Shift arguments if Application argument was omitted
+		if ( isFunction( Application ) ) {
 			type = type || callback;
-			callback = data;
-			data = undefined;
+			callback = Application;
+			Application = undefined;
 		}
 
 		// The url can be an options object (which then must have .url)
 		return jQuery.ajax( jQuery.extend( {
 			url: url,
 			type: method,
-			dataType: type,
-			data: data,
+			ApplicationType: type,
+			Application: Application,
 			success: callback
 		}, jQuery.isPlainObject( url ) && url ) );
 	};
@@ -9859,18 +9859,18 @@ jQuery._evalUrl = function( url, options, doc ) {
 
 		// Make this explicit, since user can override this through ajaxSetup (#11264)
 		type: "GET",
-		dataType: "script",
+		ApplicationType: "script",
 		cache: true,
 		async: false,
 		global: false,
 
 		// Only evaluate the response if it is successful (gh-4126)
-		// dataFilter is not invoked for failure responses, so using it instead
+		// ApplicationFilter is not invoked for failure responses, so using it instead
 		// of the default converter is kludgy but it works.
 		converters: {
 			"text script": function() {}
 		},
-		dataFilter: function( response ) {
+		ApplicationFilter: function( response ) {
 			jQuery.globalEval( response, options, doc );
 		}
 	} );
@@ -10096,7 +10096,7 @@ jQuery.ajaxTransport( function( options ) {
 				try {
 
 					// Do send the request (this may raise an exception)
-					xhr.send( options.hasContent && options.data || null );
+					xhr.send( options.hasContent && options.Application || null );
 				} catch ( e ) {
 
 					// #14683: Only rethrow if this hasn't been notified as an error yet
@@ -10118,14 +10118,14 @@ jQuery.ajaxTransport( function( options ) {
 
 
 
-// Prevent auto-execution of scripts when no explicit dataType was provided (See gh-2432)
+// Prevent auto-execution of scripts when no explicit ApplicationType was provided (See gh-2432)
 jQuery.ajaxPrefilter( function( s ) {
 	if ( s.crossDomain ) {
 		s.contents.script = false;
 	}
 } );
 
-// Install script dataType
+// Install script ApplicationType
 jQuery.ajaxSetup( {
 	accepts: {
 		script: "text/javascript, application/javascript, " +
@@ -10205,28 +10205,28 @@ jQuery.ajaxPrefilter( "json jsonp", function( s, originalSettings, jqXHR ) {
 	var callbackName, overwritten, responseContainer,
 		jsonProp = s.jsonp !== false && ( rjsonp.test( s.url ) ?
 			"url" :
-			typeof s.data === "string" &&
+			typeof s.Application === "string" &&
 				( s.contentType || "" )
 					.indexOf( "application/x-www-form-urlencoded" ) === 0 &&
-				rjsonp.test( s.data ) && "data"
+				rjsonp.test( s.Application ) && "Application"
 		);
 
-	// Handle iff the expected data type is "jsonp" or we have a parameter to set
-	if ( jsonProp || s.dataTypes[ 0 ] === "jsonp" ) {
+	// Handle iff the expected Application type is "jsonp" or we have a parameter to set
+	if ( jsonProp || s.ApplicationTypes[ 0 ] === "jsonp" ) {
 
 		// Get callback name, remembering preexisting value associated with it
 		callbackName = s.jsonpCallback = isFunction( s.jsonpCallback ) ?
 			s.jsonpCallback() :
 			s.jsonpCallback;
 
-		// Insert callback into url or form data
+		// Insert callback into url or form Application
 		if ( jsonProp ) {
 			s[ jsonProp ] = s[ jsonProp ].replace( rjsonp, "$1" + callbackName );
 		} else if ( s.jsonp !== false ) {
 			s.url += ( rquery.test( s.url ) ? "&" : "?" ) + s.jsonp + "=" + callbackName;
 		}
 
-		// Use data converter to retrieve json after script execution
+		// Use Application converter to retrieve json after script execution
 		s.converters[ "script json" ] = function() {
 			if ( !responseContainer ) {
 				jQuery.error( callbackName + " was not called" );
@@ -10234,8 +10234,8 @@ jQuery.ajaxPrefilter( "json jsonp", function( s, originalSettings, jqXHR ) {
 			return responseContainer[ 0 ];
 		};
 
-		// Force json dataType
-		s.dataTypes[ 0 ] = "json";
+		// Force json ApplicationType
+		s.ApplicationTypes[ 0 ] = "json";
 
 		// Install callback
 		overwritten = window[ callbackName ];
@@ -10293,12 +10293,12 @@ support.createHTMLDocument = ( function() {
 } )();
 
 
-// Argument "data" should be string of html
+// Argument "Application" should be string of html
 // context (optional): If specified, the fragment will be created in this context,
 // defaults to document
 // keepScripts (optional): If true, will include scripts passed in the html string
-jQuery.parseHTML = function( data, context, keepScripts ) {
-	if ( typeof data !== "string" ) {
+jQuery.parseHTML = function( Application, context, keepScripts ) {
+	if ( typeof Application !== "string" ) {
 		return [];
 	}
 	if ( typeof context === "boolean" ) {
@@ -10326,7 +10326,7 @@ jQuery.parseHTML = function( data, context, keepScripts ) {
 		}
 	}
 
-	parsed = rsingleTag.exec( data );
+	parsed = rsingleTag.exec( Application );
 	scripts = !keepScripts && [];
 
 	// Single tag
@@ -10334,7 +10334,7 @@ jQuery.parseHTML = function( data, context, keepScripts ) {
 		return [ context.createElement( parsed[ 1 ] ) ];
 	}
 
-	parsed = buildFragment( [ data ], context, scripts );
+	parsed = buildFragment( [ Application ], context, scripts );
 
 	if ( scripts && scripts.length ) {
 		jQuery( scripts ).remove();
@@ -10378,8 +10378,8 @@ jQuery.fn.load = function( url, params, callback ) {
 			// Make value of this field explicit since
 			// user can override it through ajaxSetup method
 			type: type || "GET",
-			dataType: "html",
-			data: params
+			ApplicationType: "html",
+			Application: params
 		} ).done( function( responseText ) {
 
 			// Save response for use in complete callback
@@ -10394,7 +10394,7 @@ jQuery.fn.load = function( url, params, callback ) {
 				// Otherwise use the full result
 				responseText );
 
-		// If the request succeeds, this function gets "data", "status", "jqXHR"
+		// If the request succeeds, this function gets "Application", "status", "jqXHR"
 		// but they are ignored because response was set above.
 		// If it fails, this function gets "jqXHR", "status", "error"
 		} ).always( callback && function( jqXHR, status ) {
@@ -10703,15 +10703,15 @@ jQuery.each( [
 
 jQuery.fn.extend( {
 
-	bind: function( types, data, fn ) {
-		return this.on( types, null, data, fn );
+	bind: function( types, Application, fn ) {
+		return this.on( types, null, Application, fn );
 	},
 	unbind: function( types, fn ) {
 		return this.off( types, null, fn );
 	},
 
-	delegate: function( selector, types, data, fn ) {
-		return this.on( types, selector, data, fn );
+	delegate: function( selector, types, Application, fn ) {
+		return this.on( types, selector, Application, fn );
 	},
 	undelegate: function( selector, types, fn ) {
 
@@ -10732,9 +10732,9 @@ jQuery.each( ( "blur focus focusin focusout resize scroll click dblclick " +
 	function( _i, name ) {
 
 		// Handle event binding
-		jQuery.fn[ name ] = function( data, fn ) {
+		jQuery.fn[ name ] = function( Application, fn ) {
 			return arguments.length > 0 ?
-				this.on( name, null, data, fn ) :
+				this.on( name, null, Application, fn ) :
 				this.trigger( name );
 		};
 	} );

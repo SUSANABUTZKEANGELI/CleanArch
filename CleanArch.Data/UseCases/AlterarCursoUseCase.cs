@@ -1,8 +1,8 @@
-﻿using CleanArch.Data.Repository;
+﻿using CleanArch.Application.Repository;
 using CleanArch.Domain.Entities;
 using CleanArch.Domain.Repositories;
 
-namespace CleanArch.Data.UseCases
+namespace CleanArch.Application.UseCases
 {
     public class AlterarCursoUseCase
     {
@@ -16,7 +16,7 @@ namespace CleanArch.Data.UseCases
             _professorRepository = professorRepository;
         }
 
-        public Curso AlterarCurso(int id, string nome, string descricao, DateTime dataInicio, bool ativo, int idProfessor) 
+        public Curso AlterarCurso(int id, string nome, string descricao, DateTime ApplicationInicio, bool ativo, int idProfessor) 
         {
             var curso = _cursoRepository.SelecionarPorId(id);
             if (curso == null)
@@ -34,7 +34,7 @@ namespace CleanArch.Data.UseCases
 
             curso.Nome = nome;
             curso.Descricao = descricao;
-            curso.DataInicio = dataInicio;
+            curso.ApplicationInicio = ApplicationInicio;
             curso.Ativo = ativo;
             curso.IdProfessor = idProfessor;
 

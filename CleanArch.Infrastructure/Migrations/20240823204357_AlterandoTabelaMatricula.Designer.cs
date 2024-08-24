@@ -64,7 +64,7 @@ namespace CleanArch.Infrastructure.Migrations
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("DataInicio")
+                    b.Property<DateTime>("ApplicationInicio")
                         .HasColumnType("datetime");
 
                     b.Property<string>("Descricao")

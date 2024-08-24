@@ -1,6 +1,6 @@
 ﻿using CleanArch.Domain.Repositories;
 
-namespace CleanArch.Data.UseCases
+namespace CleanArch.Application.UseCases
 {
     public class ExcluirCursoUseCase
     {

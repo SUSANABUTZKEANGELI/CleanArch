@@ -1,5 +1,5 @@
 ﻿using CleanArch.API.Dtos;
-using CleanArch.Data.UseCases;
+using CleanArch.Application.UseCases;
 using CleanArch.Domain.Entities;
 using CleanArch.Domain.Repositories;
 using Microsoft.AspNetCore.Mvc;

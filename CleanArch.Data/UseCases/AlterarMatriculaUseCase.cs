@@ -2,7 +2,7 @@
 using CleanArch.Domain.Entities.Enums;
 using CleanArch.Domain.Repositories;
 
-namespace CleanArch.Data.UseCases
+namespace CleanArch.Application.UseCases
 {
     public class AlterarMatriculaUseCase
     {

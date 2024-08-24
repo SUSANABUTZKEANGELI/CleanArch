@@ -2,7 +2,7 @@
 using CleanArch.Domain.Repositories;
 using CleanArch.Infrastructure;
 
-namespace CleanArch.Data.Repository
+namespace CleanArch.Application.Repository
 {
     public class ProfessorRepository : BaseRepository<Professor>, IProfessorRepository
     {

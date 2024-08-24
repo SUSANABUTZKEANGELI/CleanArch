@@ -1,5 +1,5 @@
-using CleanArch.Data.Repository;
-using CleanArch.Data.UseCases;
+using CleanArch.Application.Repository;
+using CleanArch.Application.UseCases;
 using CleanArch.Domain.Repositories;
 using CleanArch.Infrastructure;
 using Microsoft.EntityFrameworkCore;

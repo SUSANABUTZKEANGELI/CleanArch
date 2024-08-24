@@ -1,5 +1,5 @@
 ﻿using CleanArch.API.Dtos;
-using CleanArch.Data.UseCases;
+using CleanArch.Application.UseCases;
 using CleanArch.Domain.Entities;
 using CleanArch.Domain.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -59,7 +59,7 @@ namespace CleanArch.API.Controllers
                 return BadRequest("Dados inválidos.");
             }
 
-            var curso = _incluirCursoUseCase.IncluirCurso(cursoDto.Nome, cursoDto.Descricao, cursoDto.DataInicio, cursoDto.IdProfessor);
+            var curso = _incluirCursoUseCase.IncluirCurso(cursoDto.Nome, cursoDto.Descricao, cursoDto.ApplicationInicio, cursoDto.IdProfessor);
 
             if (curso != null)
             {
@@ -78,7 +78,7 @@ namespace CleanArch.API.Controllers
             {
                 return BadRequest("Dados inválidos.");
             }
-            var curso = _alterarCursoUseCase.AlterarCurso(id, cursoAltDto.Nome, cursoAltDto.Descricao, cursoAltDto.DataInicio, cursoAltDto.Ativo, cursoAltDto.IdProfessor);
+            var curso = _alterarCursoUseCase.AlterarCurso(id, cursoAltDto.Nome, cursoAltDto.Descricao, cursoAltDto.ApplicationInicio, cursoAltDto.Ativo, cursoAltDto.IdProfessor);
 
             if (curso != null)
             {

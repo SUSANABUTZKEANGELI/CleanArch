@@ -1,7 +1,7 @@
 ﻿using CleanArch.Domain.Entities;
 using CleanArch.Domain.Repositories;
 
-namespace CleanArch.Data.UseCases
+namespace CleanArch.Application.UseCases
 {
     public class IncluirCursoUseCase
     {
@@ -14,7 +14,7 @@ namespace CleanArch.Data.UseCases
             _professorRepository = professorRepository; 
         }
 
-        public Curso IncluirCurso(string nome, string descricao, DateTime dataInicio, int idProfessor) 
+        public Curso IncluirCurso(string nome, string descricao, DateTime ApplicationInicio, int idProfessor) 
         {
             var professor = _professorRepository.SelecionarPorId(idProfessor);
             if (professor == null)
@@ -27,7 +27,7 @@ namespace CleanArch.Data.UseCases
             {
                 Nome = nome,
                 Descricao = descricao,
-                DataInicio = dataInicio,
+                ApplicationInicio = ApplicationInicio,
                 Ativo = true,
                 IdProfessor = idProfessor
             };

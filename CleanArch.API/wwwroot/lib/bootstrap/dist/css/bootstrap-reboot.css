@@ -99,7 +99,7 @@ p {
 }
 
 abbr[title],
-abbr[data-bs-original-title] {
+abbr[Application-bs-original-title] {
   -webkit-text-decoration: underline dotted;
   text-decoration: underline dotted;
   cursor: help;

@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace CleanArch.Domain.Entities
+﻿namespace CleanArch.Domain.Entities
 {
     public class Aluno : IEntity
     {

@@ -3,7 +3,7 @@ using CleanArch.Domain.Repositories;
 using CleanArch.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
-namespace CleanArch.Data.Repository
+namespace CleanArch.Application.Repository
 {
     public class CursoRepository : BaseRepository<Curso>, ICursoRepository
     {

@@ -284,7 +284,7 @@ $.validator.addMethod( "cpfBR", function( value ) {
 		return ( result === cn );
 	};
 
-	// Checking for dump data
+	// Checking for dump Application
 	if ( value === "" ||
 		value === "00000000000" ||
 		value === "11111111111" ||
@@ -496,14 +496,14 @@ $.validator.addMethod( "dateFA", function( value, element ) {
 $.validator.addMethod( "dateITA", function( value, element ) {
 	var check = false,
 		re = /^\d{1,2}\/\d{1,2}\/\d{4}$/,
-		adata, gg, mm, aaaa, xdata;
+		aApplication, gg, mm, aaaa, xApplication;
 	if ( re.test( value ) ) {
-		adata = value.split( "/" );
-		gg = parseInt( adata[ 0 ], 10 );
-		mm = parseInt( adata[ 1 ], 10 );
-		aaaa = parseInt( adata[ 2 ], 10 );
-		xdata = new Date( Date.UTC( aaaa, mm - 1, gg, 12, 0, 0, 0 ) );
-		if ( ( xdata.getUTCFullYear() === aaaa ) && ( xdata.getUTCMonth() === mm - 1 ) && ( xdata.getUTCDate() === gg ) ) {
+		aApplication = value.split( "/" );
+		gg = parseInt( aApplication[ 0 ], 10 );
+		mm = parseInt( aApplication[ 1 ], 10 );
+		aaaa = parseInt( aApplication[ 2 ], 10 );
+		xApplication = new Date( Date.UTC( aaaa, mm - 1, gg, 12, 0, 0, 0 ) );
+		if ( ( xApplication.getUTCFullYear() === aaaa ) && ( xApplication.getUTCMonth() === mm - 1 ) && ( xApplication.getUTCDate() === gg ) ) {
 			check = true;
 		} else {
 			check = false;
@@ -956,21 +956,21 @@ $.validator.addMethod( "postcodeUK", function( value, element ) {
 $.validator.addMethod( "require_from_group", function( value, element, options ) {
 	var $fields = $( options[ 1 ], element.form ),
 		$fieldsFirst = $fields.eq( 0 ),
-		validator = $fieldsFirst.data( "valid_req_grp" ) ? $fieldsFirst.data( "valid_req_grp" ) : $.extend( {}, this ),
+		validator = $fieldsFirst.Application( "valid_req_grp" ) ? $fieldsFirst.Application( "valid_req_grp" ) : $.extend( {}, this ),
 		isValid = $fields.filter( function() {
 			return validator.elementValue( this );
 		} ).length >= options[ 0 ];
 
 	// Store the cloned validator for future validation
-	$fieldsFirst.data( "valid_req_grp", validator );
+	$fieldsFirst.Application( "valid_req_grp", validator );
 
 	// If element isn't being validated, run each require_from_group field's validation rules
-	if ( !$( element ).data( "being_validated" ) ) {
-		$fields.data( "being_validated", true );
+	if ( !$( element ).Application( "being_validated" ) ) {
+		$fields.Application( "being_validated", true );
 		$fields.each( function() {
 			validator.element( this );
 		} );
-		$fields.data( "being_validated", false );
+		$fields.Application( "being_validated", false );
 	}
 	return isValid;
 }, $.validator.format( "Please fill at least {0} of these fields." ) );
@@ -999,22 +999,22 @@ $.validator.addMethod( "require_from_group", function( value, element, options )
 $.validator.addMethod( "skip_or_fill_minimum", function( value, element, options ) {
 	var $fields = $( options[ 1 ], element.form ),
 		$fieldsFirst = $fields.eq( 0 ),
-		validator = $fieldsFirst.data( "valid_skip" ) ? $fieldsFirst.data( "valid_skip" ) : $.extend( {}, this ),
+		validator = $fieldsFirst.Application( "valid_skip" ) ? $fieldsFirst.Application( "valid_skip" ) : $.extend( {}, this ),
 		numberFilled = $fields.filter( function() {
 			return validator.elementValue( this );
 		} ).length,
 		isValid = numberFilled === 0 || numberFilled >= options[ 0 ];
 
 	// Store the cloned validator for future validation
-	$fieldsFirst.data( "valid_skip", validator );
+	$fieldsFirst.Application( "valid_skip", validator );
 
 	// If element isn't being validated, run each skip_or_fill_minimum field's validation rules
-	if ( !$( element ).data( "being_validated" ) ) {
-		$fields.data( "being_validated", true );
+	if ( !$( element ).Application( "being_validated" ) ) {
+		$fields.Application( "being_validated", true );
 		$fields.each( function() {
 			validator.element( this );
 		} );
-		$fields.data( "being_validated", false );
+		$fields.Application( "being_validated", false );
 	}
 	return isValid;
 }, $.validator.format( "Please either skip these fields or fill at least {0} of them." ) );

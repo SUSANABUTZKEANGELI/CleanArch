@@ -1,7 +1,7 @@
 ﻿using CleanArch.Domain.Entities;
 using CleanArch.Domain.Repositories;
 
-namespace CleanArch.Data.UseCases
+namespace CleanArch.Application.UseCases
 {
     public class IncluirMatriculaUseCase
     {
@@ -36,11 +36,11 @@ namespace CleanArch.Data.UseCases
             }
 
             if (!curso.Result.Ativo ||
-                curso.Result.DataInicio <= DateTime.UtcNow)
+                curso.Result.ApplicationInicio <= DateTime.UtcNow)
             {
                 return null;
                 // curso inativo ou 
-                // data de início do curso ultrapassada
+                // Application de início do curso ultrapassada
             }
 
             var aluno = _alunoRepository.SelecionarPorId(idAluno);

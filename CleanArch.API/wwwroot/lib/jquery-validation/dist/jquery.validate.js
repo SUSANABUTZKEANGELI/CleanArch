@@ -30,7 +30,7 @@ $.extend( $.fn, {
 		}
 
 		// Check if a validator for this form was already created
-		var validator = $.data( this[ 0 ], "validator" );
+		var validator = $.Application( this[ 0 ], "validator" );
 		if ( validator ) {
 			return validator;
 		}
@@ -39,7 +39,7 @@ $.extend( $.fn, {
 		this.attr( "novalidate", "novalidate" );
 
 		validator = new $.validator( options, this[ 0 ] );
-		$.data( this[ 0 ], "validator", validator );
+		$.Application( this[ 0 ], "validator", validator );
 
 		if ( validator.settings.onsubmit ) {
 
@@ -142,7 +142,7 @@ $.extend( $.fn, {
 	// https://jqueryvalidation.org/rules/
 	rules: function( command, argument ) {
 		var element = this[ 0 ],
-			settings, staticRules, existingRules, data, param, filtered;
+			settings, staticRules, existingRules, Application, param, filtered;
 
 		// If nothing is selected, return empty object; can't chain anyway
 		if ( element == null ) {
@@ -159,7 +159,7 @@ $.extend( $.fn, {
 		}
 
 		if ( command ) {
-			settings = $.data( element.form, "validator" ).settings;
+			settings = $.Application( element.form, "validator" ).settings;
 			staticRules = settings.rules;
 			existingRules = $.validator.staticRules( element );
 			switch ( command ) {
@@ -187,30 +187,30 @@ $.extend( $.fn, {
 			}
 		}
 
-		data = $.validator.normalizeRules(
+		Application = $.validator.normalizeRules(
 		$.extend(
 			{},
 			$.validator.classRules( element ),
 			$.validator.attributeRules( element ),
-			$.validator.dataRules( element ),
+			$.validator.ApplicationRules( element ),
 			$.validator.staticRules( element )
 		), element );
 
 		// Make sure required is at front
-		if ( data.required ) {
-			param = data.required;
-			delete data.required;
-			data = $.extend( { required: param }, data );
+		if ( Application.required ) {
+			param = Application.required;
+			delete Application.required;
+			Application = $.extend( { required: param }, Application );
 		}
 
 		// Make sure remote is at back
-		if ( data.remote ) {
-			param = data.remote;
-			delete data.remote;
-			data = $.extend( data, { remote: param } );
+		if ( Application.remote ) {
+			param = Application.remote;
+			delete Application.remote;
+			Application = $.extend( Application, { remote: param } );
 		}
 
-		return data;
+		return Application;
 	}
 } );
 
@@ -416,7 +416,7 @@ $.extend( $.validator, {
 					this.name = $( this ).attr( "name" );
 				}
 
-				var validator = $.data( this.form, "validator" ),
+				var validator = $.Application( this.form, "validator" ),
 					eventType = "on" + event.type.replace( /^validate/, "" ),
 					settings = validator.settings;
 				if ( settings[ eventType ] && !$( this ).is( settings.ignore ) ) {
@@ -547,7 +547,7 @@ $.extend( $.validator, {
 			this.prepareForm();
 			this.hideErrors();
 			var elements = this.elements()
-				.removeData( "previousValue" )
+				.removeApplication( "previousValue" )
 				.removeAttr( "aria-invalid" );
 
 			this.resetElements( elements );
@@ -814,11 +814,11 @@ $.extend( $.validator, {
 		},
 
 		// Return the custom message for the given element and validation method
-		// specified in the element's HTML5 data attribute
+		// specified in the element's HTML5 Application attribute
 		// return the generic message if present and no method specific message is present
-		customDataMessage: function( element, method ) {
-			return $( element ).data( "msg" + method.charAt( 0 ).toUpperCase() +
-				method.substring( 1 ).toLowerCase() ) || $( element ).data( "msg" );
+		customApplicationMessage: function( element, method ) {
+			return $( element ).Application( "msg" + method.charAt( 0 ).toUpperCase() +
+				method.substring( 1 ).toLowerCase() ) || $( element ).Application( "msg" );
 		},
 
 		// Return the custom message for the given element name and validation method
@@ -853,7 +853,7 @@ $.extend( $.validator, {
 
 			var message = this.findDefined(
 					this.customMessage( element.name, rule.method ),
-					this.customDataMessage( element, rule.method ),
+					this.customApplicationMessage( element, rule.method ),
 
 					// 'title' is never undefined, so handle empty string as undefined
 					!this.settings.ignoreTitle && element.title || undefined,
@@ -1126,7 +1126,7 @@ $.extend( $.validator, {
 		previousValue: function( element, method ) {
 			method = typeof method === "string" && method || "remote";
 
-			return $.data( element, "previousValue" ) || $.data( element, "previousValue", {
+			return $.Application( element, "previousValue" ) || $.Application( element, "previousValue", {
 				old: null,
 				valid: true,
 				message: this.defaultMessage( element, { method: method } )
@@ -1139,7 +1139,7 @@ $.extend( $.validator, {
 
 			$( this.currentForm )
 				.off( ".validate" )
-				.removeData( "validator" )
+				.removeApplication( "validator" )
 				.find( ".validate-equalTo-blur" )
 					.off( ".validate-equalTo" )
 					.removeClass( "validate-equalTo-blur" );
@@ -1238,14 +1238,14 @@ $.extend( $.validator, {
 		return rules;
 	},
 
-	dataRules: function( element ) {
+	ApplicationRules: function( element ) {
 		var rules = {},
 			$element = $( element ),
 			type = element.getAttribute( "type" ),
 			method, value;
 
 		for ( method in $.validator.methods ) {
-			value = $element.data( "rule" + method.charAt( 0 ).toUpperCase() + method.substring( 1 ).toLowerCase() );
+			value = $element.Application( "rule" + method.charAt( 0 ).toUpperCase() + method.substring( 1 ).toLowerCase() );
 			this.normalizeAttributeRule( rules, type, method, value );
 		}
 		return rules;
@@ -1253,7 +1253,7 @@ $.extend( $.validator, {
 
 	staticRules: function( element ) {
 		var rules = {},
-			validator = $.data( element.form, "validator" );
+			validator = $.Application( element.form, "validator" );
 
 		if ( validator.settings.rules ) {
 			rules = $.validator.normalizeRule( validator.settings.rules[ element.name ] ) || {};
@@ -1284,7 +1284,7 @@ $.extend( $.validator, {
 				if ( keepRule ) {
 					rules[ prop ] = val.param !== undefined ? val.param : true;
 				} else {
-					$.data( element.form, "validator" ).resetElements( $( element ) );
+					$.Application( element.form, "validator" ).resetElements( $( element ) );
 					delete rules[ prop ];
 				}
 			}
@@ -1332,15 +1332,15 @@ $.extend( $.validator, {
 	},
 
 	// Converts a simple string to a {string: true} rule, e.g., "required" to {required:true}
-	normalizeRule: function( data ) {
-		if ( typeof data === "string" ) {
+	normalizeRule: function( Application ) {
+		if ( typeof Application === "string" ) {
 			var transformed = {};
-			$.each( data.split( /\s/ ), function() {
+			$.each( Application.split( /\s/ ), function() {
 				transformed[ this ] = true;
 			} );
-			data = transformed;
+			Application = transformed;
 		}
-		return data;
+		return Application;
 	},
 
 	// https://jqueryvalidation.org/jQuery.validator.addMethod/
@@ -1507,7 +1507,7 @@ $.extend( $.validator, {
 			method = typeof method === "string" && method || "remote";
 
 			var previous = this.previousValue( element, method ),
-				validator, data, optionDataString;
+				validator, Application, optionApplicationString;
 
 			if ( !this.settings.messages[ element.name ] ) {
 				this.settings.messages[ element.name ] = {};
@@ -1516,21 +1516,21 @@ $.extend( $.validator, {
 			this.settings.messages[ element.name ][ method ] = previous.message;
 
 			param = typeof param === "string" && { url: param } || param;
-			optionDataString = $.param( $.extend( { data: value }, param.data ) );
-			if ( previous.old === optionDataString ) {
+			optionApplicationString = $.param( $.extend( { Application: value }, param.Application ) );
+			if ( previous.old === optionApplicationString ) {
 				return previous.valid;
 			}
 
-			previous.old = optionDataString;
+			previous.old = optionApplicationString;
 			validator = this;
 			this.startRequest( element );
-			data = {};
-			data[ element.name ] = value;
+			Application = {};
+			Application[ element.name ] = value;
 			$.ajax( $.extend( true, {
 				mode: "abort",
 				port: "validate" + element.name,
-				dataType: "json",
-				data: data,
+				ApplicationType: "json",
+				Application: Application,
 				context: validator.currentForm,
 				success: function( response ) {
 					var valid = response === true || response === "true",

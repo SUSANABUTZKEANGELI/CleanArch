@@ -1,11 +1,12 @@
 ﻿using CleanArch.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CleanArch.Infrastructure.Maps
 {
     internal class CursoMap : IEntityTypeConfiguration<Curso>
     {
-        public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Curso> builder)
+        public void Configure(EntityTypeBuilder<Curso> builder)
         {
             builder.ToTable("Curso");
 
@@ -19,7 +20,7 @@ namespace CleanArch.Infrastructure.Maps
                 .HasColumnType("varchar(500)")
                 .IsRequired();
 
-            builder.Property(x => x.DataInicio)
+            builder.Property(x => x.ApplicationInicio)
                 .HasColumnType("datetime")
                 .IsRequired();
 
