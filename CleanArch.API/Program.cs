@@ -17,7 +17,7 @@ namespace CleanArch.API
 
             builder.Services.AddControllers();
 
-            builder.Services.AddFluentValidationAutoValidation();
+            //builder.Services.AddFluentValidationAutoValidation();
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -46,7 +46,7 @@ namespace CleanArch.API
             builder.Services.AddScoped<AlterarMatriculaUseCase>();
 
             // Registrar validadores do FluentValidation
-            builder.Services.AddValidatorsFromAssemblyContaining<IncluirAlunoUseCaseValidator>();
+            //builder.Services.AddValidatorsFromAssemblyContaining<IncluirAlunoUseCaseValidator>();
 
 
             builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));

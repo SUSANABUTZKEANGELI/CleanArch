@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CleanArch.Data\CleanArch.Application.csproj" />
+    <ProjectReference Include="..\CleanArch.Application\CleanArch.Application.csproj" />
   </ItemGroup>
 
 </Project>
