@@ -1,11 +1,13 @@
+using CleanArch.Application.QueryHandlers.Alunos;
 using CleanArch.Application.Repository;
 using CleanArch.Application.UseCases;
-using CleanArch.Application.Validators;
+using CleanArch.Domain.Entities;
 using CleanArch.Domain.Repositories;
 using CleanArch.Infrastructure;
-using FluentValidation;
-using FluentValidation.AspNetCore;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace CleanArch.API
 {
@@ -16,17 +18,19 @@ namespace CleanArch.API
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddControllers();
+            builder.Services.AddScoped<IRequestHandler<ListarTodosAlunosRequest, List<Aluno>>, ListarTodosAlunosHandler>();
+            builder.Services.AddScoped<IRequestHandler<ListarUmAlunoRequest, Aluno>, ListarUmAlunoHandler>();
+            builder.Services.AddScoped<IRequestHandler<IncluirAlunoRequest, Aluno>, IncluirAlunoHandler>();
+            builder.Services.AddScoped<IRequestHandler<AlterarAlunoRequest, Aluno>, AlterarAlunoHandler>();
 
-            builder.Services.AddFluentValidationAutoValidation();
+            builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+
+            //builder.Services.AddFluentValidationAutoValidation();
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.AddScoped<IncluirAlunoUseCase>();
-            builder.Services.AddScoped<ListarTodosAlunosUseCase>();
-            builder.Services.AddScoped<ListarUmAlunoUseCase>();
-            builder.Services.AddScoped<AlterarAlunoUseCase>();
             builder.Services.AddScoped<ExcluirAlunoUseCase>();
 
             builder.Services.AddScoped<IncluirProfessorUseCase>();
@@ -46,9 +50,7 @@ namespace CleanArch.API
             builder.Services.AddScoped<AlterarMatriculaUseCase>();
 
             // Registrar validadores do FluentValidation
-            builder.Services.AddValidatorsFromAssemblyContaining<AlunoUseCaseValidator>();
-            builder.Services.AddValidatorsFromAssemblyContaining<ProfessorUseCaseValidator>();
-            builder.Services.AddValidatorsFromAssemblyContaining<CursoUseCaseValidator>();
+            //builder.Services.AddValidatorsFromAssemblyContaining<IncluirAlunoUseCaseValidator>();
 
 
             builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
