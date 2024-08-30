@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using CleanArch.Application.UseCases;
 using CleanArch.Domain.Repositories;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using CleanArch.Application.QueryHandlers.Alunos;
 using Azure.Core;
@@ -59,7 +60,8 @@ namespace CleanArch.API.Controllers
         {
             if (request == null)
             {
-                return BadRequest("Dados inválidos.");
+                _incluirAlunoUseCase.IncluirAluno(alunoDto.Nome, alunoDto.Endereco, alunoDto.Email);
+                return Ok(alunoDto); 
             }
 
             var result = await _mediator.Send(request);
@@ -68,10 +70,7 @@ namespace CleanArch.API.Controllers
             {
                 return Ok(result);
             }
-            else
-            {
-                return BadRequest("Falha na inclusão do aluno");
-            }
+
         }
 
         [HttpPut]
@@ -79,7 +78,8 @@ namespace CleanArch.API.Controllers
         {
             if (request == null)
             {
-                return BadRequest("Dados inválidos.");
+                _alterarAlunoUseCase.AlterarAluno(id, alunoAltDto.Nome, alunoAltDto.Endereco, alunoAltDto.Email, alunoAltDto.Ativo);
+                return Ok(alunoAltDto); 
             }
 
             var result = await _mediator.Send(request);
@@ -92,6 +92,7 @@ namespace CleanArch.API.Controllers
             {
                 return BadRequest("Falha na alteração do aluno");
             }
+
         }
 
         [HttpDelete("{id}")]

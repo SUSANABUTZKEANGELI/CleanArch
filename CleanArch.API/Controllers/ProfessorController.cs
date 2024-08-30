@@ -2,6 +2,7 @@
 using CleanArch.Application.UseCases;
 using CleanArch.Domain.Entities;
 using CleanArch.Domain.Repositories;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CleanArch.API.Controllers
@@ -52,41 +53,39 @@ namespace CleanArch.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult IncluirProfessor([FromBody] ProfessorDto ProfessorDto)
-        {
-            if (ProfessorDto == null)
+        public IActionResult IncluirProfessor([FromBody] ProfessorDto professorDto)
+        {            
+            try
             {
-                return BadRequest("Dados inválidos.");
+                _incluirProfessorUseCase.IncluirProfessor(professorDto.Nome, professorDto.Email);
+                return Ok(professorDto); 
             }
-
-            var professor = _incluirProfessorUseCase.IncluirProfessor(ProfessorDto.Nome, ProfessorDto.Email);
-
-            if (professor != null)
+            catch (ValidationException ex)
             {
-                return Ok(professor);
-            }
-            else
-            {
-                return BadRequest("Falha na inclusão do Professor");
+                // Cria uma resposta com os erros de validação
+                var errors = ex.Errors.Select(e => new { e.ErrorMessage });
+                return BadRequest(new { Errors = errors });
             }
         }
 
         [HttpPut("{id}")]
-        public IActionResult AlterarProfessor(int id, [FromBody] ProfessorDto ProfessorDto)
-        {
-            if (id == null || ProfessorDto == null)
+        public IActionResult AlterarProfessor(int id, [FromBody] ProfessorDto professorDto)
+        {            
+            try
             {
-                return BadRequest("Dados inválidos.");
+                _alterarProfessorUseCase.AlterarProfessor(id, professorDto.Nome, professorDto.Email);
+                return Ok(professorDto);
             }
-            var Professor = _alterarProfessorUseCase.AlterarProfessor(id, ProfessorDto.Nome, ProfessorDto.Email);
+            catch (ValidationException ex)
+            {
+                if (ex.Message == "Professor Inexistente")
+                {
+                    return NotFound(new { Message = ex.Message });
+                }
 
-            if (Professor != null)
-            {
-                return Ok(Professor);
-            }
-            else
-            {
-                return BadRequest("Falha na alteração do Professor");
+                // Cria uma resposta com os erros de validação
+                var errors = ex.Errors.Select(e => new { e.ErrorMessage });
+                return BadRequest(new { Errors = errors });
             }
         }
 
