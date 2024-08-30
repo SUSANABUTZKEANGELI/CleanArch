@@ -1,8 +1,9 @@
-﻿using CleanArch.API.Dtos;
+﻿using MediatR;
 using CleanArch.Application.UseCases;
-using CleanArch.Domain.Entities;
 using CleanArch.Domain.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using CleanArch.Application.QueryHandlers.Alunos;
+using Azure.Core;
 
 namespace CleanArch.API.Controllers
 {
@@ -11,59 +12,61 @@ namespace CleanArch.API.Controllers
     public class AlunoController : ControllerBase
     {
         private readonly IAlunoRepository _repository;
-        private readonly IncluirAlunoUseCase _incluirAlunoUseCase;
-        private readonly ListarTodosAlunosUseCase _listarTodosAlunosUseCase;
-        private readonly ListarUmAlunoUseCase _listarUmAlunoUseCase;
-        private readonly AlterarAlunoUseCase _alterarAlunoUseCase;
         private readonly ExcluirAlunoUseCase _excluirAlunoUseCase;
+        private readonly IMediator _mediator;
 
-        public AlunoController(IAlunoRepository repository, 
-            IncluirAlunoUseCase incluirAlunoUseCase,
-            ListarTodosAlunosUseCase listarTodosAlunosUseCase,
-            ListarUmAlunoUseCase listarUmAlunoUseCase,
-            AlterarAlunoUseCase alterarAlunoUseCase,
-            ExcluirAlunoUseCase excluirAlunoUseCase)
+        public AlunoController(IAlunoRepository repository,
+            ExcluirAlunoUseCase excluirAlunoUseCase,
+            IMediator mediator)
         {
             _repository = repository;
-            _incluirAlunoUseCase = incluirAlunoUseCase;
-            _listarTodosAlunosUseCase = listarTodosAlunosUseCase;
-            _listarUmAlunoUseCase = listarUmAlunoUseCase;
-            _alterarAlunoUseCase = alterarAlunoUseCase;
             _excluirAlunoUseCase = excluirAlunoUseCase;
+            _mediator = mediator;
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Aluno>> Get()
+        public async Task<IActionResult> ListarAlunos()
         {
-            var alunos = _listarTodosAlunosUseCase.ListarAlunos();
-            return alunos == null ? NotFound() : alunos;
+            var query = new ListarTodosAlunosRequest();
+            var result = await _mediator.Send(query);
+
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public async Task<IActionResult> ListarUmAluno([FromRoute] int id)
         {
             if (id == null)
             {
                 return BadRequest("Dados inválidos.");
             }
 
-            var aluno = _listarUmAlunoUseCase.ListarUmAluno(id);
-            return aluno == null ? NotFound() : Ok(aluno); 
+            var query = new ListarUmAlunoRequest() { Id = id };
+            var result = await _mediator.Send(query);
+
+            if (result != null)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         [HttpPost]
-        public IActionResult IncluirAluno([FromBody] AlunoDto alunoDto)
+        public async Task<IActionResult> IncluirAlunoAsync([FromBody] IncluirAlunoRequest request)
         {
-            if (alunoDto == null)
+            if (request == null)
             {
                 return BadRequest("Dados inválidos.");
             }
 
-            var aluno = _incluirAlunoUseCase.IncluirAluno(alunoDto.Nome, alunoDto.Endereco, alunoDto.Email);
+            var result = await _mediator.Send(request);
 
-            if (aluno != null)
+            if (result != null)
             {
-                return Ok(aluno);
+                return Ok(result);
             }
             else
             {
@@ -71,18 +74,19 @@ namespace CleanArch.API.Controllers
             }
         }
 
-        [HttpPut("{id}")]
-        public IActionResult AlterarAluno(int id, [FromBody] AlunoAltDto alunoAltDto)
+        [HttpPut]
+        public async Task<IActionResult> AlterarAluno([FromBody] AlterarAlunoRequest request)
         {
-            if (id == null || alunoAltDto == null)
+            if (request == null)
             {
                 return BadRequest("Dados inválidos.");
             }
-            var aluno = _alterarAlunoUseCase.AlterarAluno(id, alunoAltDto.Nome, alunoAltDto.Endereco, alunoAltDto.Email, alunoAltDto.Ativo);
 
-            if (aluno != null)
+            var result = await _mediator.Send(request);
+
+            if (result != null)
             {
-                return Ok(aluno);
+                return Ok(result);
             }
             else
             {
@@ -91,10 +95,24 @@ namespace CleanArch.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _excluirAlunoUseCase.ExcluirAluno(id);
+            if (id == null)
+            {
+                return BadRequest("Dados inválidos.");
+            }
 
+            var query = new ExcluirAlunoRequest() { Id = id };
+            var result = await _mediator.Send(query);
+
+            if (result != null)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
     }
 }
