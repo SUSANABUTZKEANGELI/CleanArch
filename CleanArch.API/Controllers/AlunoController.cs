@@ -5,6 +5,8 @@ using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using CleanArch.Application.QueryHandlers.Alunos;
 using Azure.Core;
+using CleanArch.API.Dtos;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace CleanArch.API.Controllers
 {
@@ -56,19 +58,22 @@ namespace CleanArch.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> IncluirAlunoAsync([FromBody] IncluirAlunoRequest request)
-        {
-            if (request == null)
-            {
-                _incluirAlunoUseCase.IncluirAluno(alunoDto.Nome, alunoDto.Endereco, alunoDto.Email);
-                return Ok(alunoDto); 
-            }
+        public async Task<IActionResult> IncluirAluno([FromBody] IncluirAlunoRequest request)
+        {            
+           
+            //_incluirAlunoUseCase.IncluirAluno(alunoDto.Nome, alunoDto.Endereco, alunoDto.Email);
+            //return Ok(alunoDto);
 
-            var result = await _mediator.Send(request);
-
-            if (result != null)
+            try
             {
+                var result = await _mediator.Send(request);                           
                 return Ok(result);
+            }            
+            catch (ValidationException ex)
+            {
+                // Cria uma resposta com os erros de validação
+                var errors = ex.Errors.Select(e => new { e.ErrorMessage });
+                return BadRequest(new { Errors = errors });
             }
 
         }

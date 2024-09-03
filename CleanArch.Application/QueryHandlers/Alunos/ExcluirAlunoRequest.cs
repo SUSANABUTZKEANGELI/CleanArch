@@ -1,9 +1,8 @@
-﻿using CleanArch.Domain.Entities;
-using MediatR;
+﻿using MediatR;
 
 namespace CleanArch.Application.QueryHandlers.Alunos
 {
-    public class ExcluirAlunoRequest : IRequest<Aluno>
+    public class ExcluirAlunoRequest : IRequest<Unit>
     {
         public int Id { get; set; }
     }

@@ -8,7 +8,7 @@ namespace CleanArch.Domain.Repositories
         void Alterar(T entity);
         Task<T> Alterar2(T entity);
         void Excluir(int id);
-     //   Task<Unit> Excluir2(int id);
+        Task Excluir2(int id);
         T SelecionarPorId(int id);
         Task<T> SelecionarPorId2(int id);
         List<T> SelecionarTudo();

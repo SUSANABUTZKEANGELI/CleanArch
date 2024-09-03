@@ -4,7 +4,7 @@ using MediatR;
 
 namespace CleanArch.Application.QueryHandlers.Alunos
 {
-    public class ExcluirAlunoHandler : IRequest<Unit>
+    public class ExcluirAlunoHandler : IRequestHandler<ExcluirAlunoRequest, Unit>
     {
         private readonly IAlunoRepository _alunoRepository;
 
@@ -17,12 +17,13 @@ namespace CleanArch.Application.QueryHandlers.Alunos
         {
             var aluno = _alunoRepository.SelecionarPorId2(request.Id);
 
-            //if (aluno != null)
-            //{
-            //    await _alunoRepository.Excluir(request.Id);
-            //}
+            if (aluno != null)
+            {
+                await _alunoRepository.Excluir2(request.Id);
+            }
 
             return Unit.Value;
         }
+                
     }
 }
